@@ -1,0 +1,59 @@
+package com.example.sweater.service;
+
+import com.example.sweater.model.Restaurant;
+import com.example.sweater.repository.CrudRestaurantRepository;
+import com.example.sweater.util.exception.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+@Service
+public class RestaurantService {
+
+    private static final Sort SORT_NAME = new Sort(Sort.Direction.ASC, "name");
+
+    private final CrudRestaurantRepository crudRestaurantRepository;
+
+    @Autowired
+    public RestaurantService(CrudRestaurantRepository crudRestaurantRepository) {
+        this.crudRestaurantRepository = crudRestaurantRepository;
+    }
+
+    public Restaurant addNew(Restaurant restaurant) {
+        Assert.notNull(restaurant, "restaurant must not be null");
+        return crudRestaurantRepository.save(restaurant);
+    }
+
+    public Restaurant getById(Integer id) throws NotFoundException {
+        return crudRestaurantRepository.findById(id).orElse(null);
+    }
+
+    public List<Restaurant> getAll() {
+        return crudRestaurantRepository.findAll(SORT_NAME);
+    }
+
+    public List<Restaurant> getAllWithMealsByDate(LocalDate localDate) throws NotFoundException {
+        Assert.notNull(localDate, "local date must not be null");
+        return crudRestaurantRepository.findAllWithMealsByDate(localDate);
+    }
+
+    public Map<Restaurant, Integer> getTopWithRating(Integer number) {
+
+        return Collections.EMPTY_MAP;
+    }
+
+    public void update(Restaurant restaurant) throws NotFoundException {
+        Assert.notNull(restaurant, "restaurant must not be null");
+        crudRestaurantRepository.save(restaurant);
+    }
+
+    public void deleteById(Integer id) throws NotFoundException {
+        crudRestaurantRepository.deleteById(id);
+    }
+}
