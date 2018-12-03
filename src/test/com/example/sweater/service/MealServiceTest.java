@@ -1,4 +1,4 @@
-package com.example.sweater.web;
+package com.example.sweater.service;
 
 import com.example.sweater.model.Meal;
 import org.junit.jupiter.api.Test;
@@ -14,58 +14,55 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class MealControllerTest {
+class MealServiceTest {
 
     @Autowired
-    protected MealController mealController;
-
-    @Autowired
-    protected RestaurantController restaurantController;
+    private MealService mealService;
 
     @Test
     void addNew() {
-        Meal meal = mealController.addNew(MINDAL.getId(), STEAK);
-        assertEquals(STEAK, mealController.getById(MINDAL.getId(), meal.getId()));
+        Meal meal = mealService.addNew(MINDAL.getId(), STEAK);
+        assertEquals(STEAK, mealService.getById(MINDAL.getId(), meal.getId()));
     }
 
     @Test
     void getById() {
-        assertEquals(BURGER, mealController.getById(PEPERONI.getId(), BURGER.getId()));
+        assertEquals(BURGER, mealService.getById(PEPERONI.getId(), BURGER.getId()));
     }
 
 //    @Test
 //    void getNotFoundById() {
 //        assertThrows(NotFoundException.class, () ->
-//                mealController.getById(NON_EXISTENT_MEAL.getId()));
+//                mealService.getById(NON_EXISTENT_MEAL.getId()));
 //    }
 
     @Test
     void getAllByRestaurantId() {
-        assertEquals(ALL_PEPERONI_MEALS, mealController.getAllByRestaurantId(PEPERONI.getId()));
+        assertEquals(ALL_PEPERONI_MEALS, mealService.getAllByRestaurantId(PEPERONI.getId()));
     }
 
     @Test
     void update() {
         EGG.setPrice(370.00);
-        mealController.update(PEPERONI.getId(), EGG);
-        assertEquals(EGG, mealController.getById(PEPERONI.getId(), EGG.getId()));
+        mealService.update(PEPERONI.getId(), EGG);
+        assertEquals(EGG, mealService.getById(PEPERONI.getId(), EGG.getId()));
     }
 
 //    @Test
 //    void updateNotFound() {
 //        assertThrows(NotFoundException.class, () ->
-//                mealController.update(MINDAL.getId(), NON_EXISTENT_MEAL));
+//                mealService.update(MINDAL.getId(), NON_EXISTENT_MEAL));
 //    }
 
     @Test
     void deleteById() {
-        mealController.deleteById(PEPERONI.getId(), EGGPLANT.getId());
-        assertEquals(ALL_PEPERONI_MEALS_WITHOUT_EGGPLANT, mealController.getAllByRestaurantId(PEPERONI.getId()));
+        mealService.deleteById(PEPERONI.getId(), EGGPLANT.getId());
+        assertEquals(ALL_PEPERONI_MEALS_WITHOUT_EGGPLANT, mealService.getAllByRestaurantId(PEPERONI.getId()));
     }
 
 //    @Test
 //    void deleteNotFoundById() {
 //        assertThrows(NotFoundException.class, () ->
-//                mealController.deleteById(MINDAL.getId(), NON_EXISTENT_MEAL.getId()));
+//                mealService.deleteById(MINDAL.getId(), NON_EXISTENT_MEAL.getId()));
 //    }
 }

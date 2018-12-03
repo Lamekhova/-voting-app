@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,6 +34,7 @@ public class VoteService {
         return crudVoteRepository.findById(voteId).orElse(null);
     }
 
+    //for tests
     public List<VoteTO> getAllByUser(User user) {
         return crudVoteRepository.findAllByUser(user).stream()
                 .map(vote -> new VoteTO(
@@ -40,5 +42,17 @@ public class VoteService {
                         vote.getRestaurant().getId(),
                         vote.getRestaurant().getName()))
                 .collect(Collectors.toList());
+    }
+
+    public Map<String, Integer> getVoteResultByDate(LocalDate date){
+        Map<String, Integer> restaurantNameToNumberOfVotesMap = new HashMap<>();
+        List<Vote> votesByDate = crudVoteRepository.getAllByDate(date);
+        for (Vote vote : votesByDate) {
+            restaurantNameToNumberOfVotesMap.merge(vote.getRestaurant().getName(), 1, (a,b) -> a + b);
+        }
+        return restaurantNameToNumberOfVotesMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 }

@@ -33,6 +33,6 @@ public class MealTestData {
     public static final List<Meal> ALL_PEPERONI_MEALS = List.of(EGGPLANT, BURGER, EGG, QUESADILLA, PASTA, FONDANT);
     public static final List<Meal> ALL_PEPERONI_MEALS_WITHOUT_EGGPLANT = List.of(BURGER, EGG, QUESADILLA, PASTA, FONDANT);
 
-    public static final List<Meal> PEPERONI_MEALS_TODAY = List.of(EGGPLANT, BURGER, EGG);
-    public static final List<Meal> PERCHINI_MEALS_TODAY = List.of(PIZZA, TUNA, FOCACCIA);
+    public static final List<Meal> PEPERONI_MEALS_TODAY = List.of(BURGER, EGG, EGGPLANT);
+    public static final List<Meal> PERCHINI_MEALS_TODAY = List.of(TUNA, FOCACCIA, PIZZA);
 }

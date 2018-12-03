@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 public class MealController {
 
+    @Autowired
     private final MealService mealService;
 
     @Autowired
@@ -18,14 +19,12 @@ public class MealController {
         this.mealService = mealService;
     }
 
-    //for admin
     @PostMapping(value = "/meals/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Meal addNew(@PathVariable Integer restaurantId,
                        @RequestBody Meal meal) {
         return mealService.addNew(restaurantId, meal);
     }
 
-    //for admin
     @GetMapping(value = "/meals/restaurant/{restaurantId}/meal/{mealId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Meal getById(@PathVariable Integer restaurantId,
                         @PathVariable Integer mealId) {
@@ -37,14 +36,12 @@ public class MealController {
         return mealService.getAllByRestaurantId(restaurantId);
     }
 
-    //for admin
     @PutMapping(value = "/meals/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@PathVariable Integer restaurantId,
                        @RequestBody Meal meal) {
         mealService.update(restaurantId, meal);
     }
 
-    //for admin
     @DeleteMapping(value = "/meals/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteById(@PathVariable Integer restaurantId,
                            @PathVariable Integer id) {

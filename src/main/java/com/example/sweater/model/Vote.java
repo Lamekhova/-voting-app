@@ -10,10 +10,10 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "votes")
-@NamedEntityGraph(name = Vote.GRAPH_WITH_USER_AND_RESTAURANT, includeAllAttributes = true)
+//@NamedEntityGraph(name = Vote.GRAPH_WITH_USER_AND_RESTAURANT, includeAllAttributes = true)
 public class Vote extends AbstractBaseEntity {
 
-    public static final String GRAPH_WITH_USER_AND_RESTAURANT = "Vote.withUserAndRestaurant";
+//    public static final String GRAPH_WITH_USER_AND_RESTAURANT = "Vote.withUserAndRestaurant";
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")

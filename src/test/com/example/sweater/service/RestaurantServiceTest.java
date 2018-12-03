@@ -1,4 +1,4 @@
-package com.example.sweater.web;
+package com.example.sweater.service;
 
 import com.example.sweater.model.Restaurant;
 import org.junit.jupiter.api.Test;
@@ -19,48 +19,45 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class RestaurantControllerTest {
+class RestaurantServiceTest {
 
     @Autowired
-    protected MealController mealController;
+    private RestaurantService restaurantService;
 
-    @Autowired
-    protected RestaurantController restaurantController;
 
     @Test
     void addNew() {
-        Restaurant restaurant = restaurantController.addNew(WOOD);
-        assertEquals(restaurant, restaurantController.getById(restaurant.getId()));
+        Restaurant restaurant = restaurantService.addNew(WOOD);
+        assertEquals(restaurant, restaurantService.getById(restaurant.getId()));
     }
 
     @Test
     void addNewWithDuplicateName() {
         assertThrows(DataAccessException.class, () ->
-                restaurantController.addNew(WITH_DUPLICATE_NAME));
+                restaurantService.addNew(WITH_DUPLICATE_NAME));
     }
 
     @Test
     void getById() {
-        assertEquals(PEPERONI, restaurantController.getById(100005));
+        assertEquals(PEPERONI, restaurantService.getById(100005));
     }
 
 //    @Test
 //    void getNotFoundById() {
 //        assertThrows(NotFoundException.class, () ->
-//                restaurantController.getById(NON_EXISTENT_RESTAURANT.getId()));
+//                restaurantService.getById(NON_EXISTENT_RESTAURANT.getId()));
 //    }
 
-    //?
     @Test
     void getAll() {
-        assertEquals(RESTAURANT_LIST, restaurantController.getAll());
+        assertEquals(RESTAURANT_LIST, restaurantService.getAll());
     }
 
     @Test
     void getAllWithMealsByDate() {
         PEPERONI.setMeals(PEPERONI_MEALS_TODAY);
         PERCHINI.setMeals(PERCHINI_MEALS_TODAY);
-        List<Restaurant> list = restaurantController.getAllWithMealsByDate(LocalDate.now());
+        List<Restaurant> list = restaurantService.getAllWithMealsByDate(LocalDate.now());
         assertEquals(List.of(PEPERONI, PERCHINI), list);
         assertEquals(PEPERONI.getMeals(), list.get(0).getMeals());
         assertEquals(PERCHINI.getMeals(), list.get(1).getMeals());
@@ -69,27 +66,27 @@ public class RestaurantControllerTest {
     @Test
     void update() {
         PERCHINI.setAddress("New address");
-        restaurantController.update(PERCHINI.getId(), PERCHINI);
-        assertEquals(PERCHINI, restaurantController.getById(PERCHINI.getId()));
+        restaurantService.update(PERCHINI);
+        assertEquals(PERCHINI, restaurantService.getById(PERCHINI.getId()));
     }
 
 //    @Test
 //    void updateNotFound() {
 //        assertThrows(NotFoundException.class, () ->
-//                restaurantController.update(NON_EXISTENT_RESTAURANT.getId(), NON_EXISTENT_RESTAURANT));
+//                restaurantService.update(NON_EXISTENT_RESTAURANT.getId(), NON_EXISTENT_RESTAURANT));
 //    }
 
     //?
     @Test
     void deleteById() {
-        restaurantController.deleteById(100007);
-        assertEquals(RESTAURANT_LIST_WITHOUT_MINDAL, restaurantController.getAll());
+        restaurantService.deleteById(100007);
+        assertEquals(RESTAURANT_LIST_WITHOUT_MINDAL, restaurantService.getAll());
     }
 
 //    @Test
 //    void deleteNotFoundById() {
 //        assertThrows(NotFoundException.class, () ->
-//                restaurantController.deleteById(NON_EXISTENT_RESTAURANT.getId()));
+//                restaurantService.deleteById(NON_EXISTENT_RESTAURANT.getId()));
 //
 //    }
 }
