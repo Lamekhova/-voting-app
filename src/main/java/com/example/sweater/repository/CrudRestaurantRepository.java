@@ -17,5 +17,4 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     @EntityGraph(value = Restaurant.GRAPH_WITH_MEALS)
     @Query("SELECT DISTINCT r FROM Restaurant r LEFT JOIN FETCH r.meals m WHERE m.date = ?1 ORDER BY r.name")
     List<Restaurant> findAllWithMealsByDate(LocalDate date);
-
 }

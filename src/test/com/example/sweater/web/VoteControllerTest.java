@@ -1,6 +1,7 @@
 package com.example.sweater.web;
 
 import com.example.sweater.model.Vote;
+import com.example.sweater.to.VoteTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static com.example.sweater.UserTestData.JOHN;
-import static com.example.sweater.VoteTestData.VOTE_11;
-import static com.example.sweater.VoteTestData.VOTE_2;
+import static com.example.sweater.UserTestData.SUE;
+import static com.example.sweater.VoteTestData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
@@ -46,7 +46,10 @@ public class VoteControllerTest {
 
     @Test
     void getAllByUserId() {
-        List<Vote> userVotes = voteController.getAllByUserId(JOHN.getId());
-        assertEquals(3, userVotes.size());
+        List<VoteTO> userVotes = voteController.getAllByUser(SUE);
+        assertEquals(2, userVotes.size());
+        assertEquals(VOTE_3.getRestaurant().getId(), userVotes.get(0).getRestaurantId());
+        assertEquals(VOTE_8.getRestaurant().getId(), userVotes.get(1).getRestaurantId());
+
     }
 }

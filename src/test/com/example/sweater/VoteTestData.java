@@ -31,4 +31,6 @@ public class VoteTestData {
     public static final Vote NOT_EXISTENT_VOTE = new Vote(1, LocalDateTime.of(LocalDate.now(), LocalTime.of(8, 40)), JOHN, PEPERONI);
 
 
+
+
 }

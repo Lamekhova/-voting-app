@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class RestaurantService {
@@ -41,11 +39,6 @@ public class RestaurantService {
     public List<Restaurant> getAllWithMealsByDate(LocalDate localDate) throws NotFoundException {
         Assert.notNull(localDate, "local date must not be null");
         return crudRestaurantRepository.findAllWithMealsByDate(localDate);
-    }
-
-    public Map<Restaurant, Integer> getTopWithRating(Integer number) {
-
-        return Collections.EMPTY_MAP;
     }
 
     public void update(Restaurant restaurant) throws NotFoundException {

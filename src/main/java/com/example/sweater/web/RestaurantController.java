@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class RestaurantController {
@@ -48,17 +47,6 @@ public class RestaurantController {
     public List<Restaurant> getAllWithMealsByDate(@RequestParam(value = "date", required = false)
                                                   @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate) {
         return restaurantService.getAllWithMealsByDate(localDate == null ? LocalDate.now() : localDate);
-    }
-
-    /**
-     *
-     * @param number is the amount of restaurants with the most votes. This parameter is optional,
-     *               if the parameter value is not passed, it is equal to 10
-     * @return amount of votes for each restaurant
-     */
-    @GetMapping(value = "/restaurants/top", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<Restaurant, Integer> getTopWithRating(@RequestParam(value = "number", required = false) Integer number) {
-        return restaurantService.getTopWithRating(number == null ? 10 : number);
     }
 
     //for admin

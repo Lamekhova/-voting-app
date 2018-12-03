@@ -1,6 +1,5 @@
 package com.example.sweater.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -27,15 +26,13 @@ public class Vote extends AbstractBaseEntity {
     private LocalTime time;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
     private User user;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id", nullable = false)
-    @JsonBackReference
     private Restaurant restaurant;
 
     public Vote() {
