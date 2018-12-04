@@ -1,6 +1,7 @@
 package com.example.sweater.service;
 
 import com.example.sweater.model.Meal;
+import com.example.sweater.util.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static com.example.sweater.MealTestData.*;
-import static com.example.sweater.RestaurantTestData.MINDAL;
-import static com.example.sweater.RestaurantTestData.PEPERONI;
+import static com.example.sweater.RestaurantTestData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -30,11 +31,11 @@ class MealServiceTest {
         assertEquals(BURGER, mealService.getById(PEPERONI.getId(), BURGER.getId()));
     }
 
-//    @Test
-//    void getNotFoundById() {
-//        assertThrows(NotFoundException.class, () ->
-//                mealService.getById(NON_EXISTENT_MEAL.getId()));
-//    }
+    @Test
+    void getNotFoundById() {
+        assertThrows(NotFoundException.class, () ->
+                mealService.getById(MINDAL.getId(), NOT_EXISTENT_MEAL.getId()));
+    }
 
     @Test
     void getAllByRestaurantId() {
@@ -42,17 +43,23 @@ class MealServiceTest {
     }
 
     @Test
+    void getAllByNotFoundRestaurantId() {
+        assertThrows(NotFoundException.class, () ->
+                mealService.getAllByRestaurantId(NOT_EXISTENT_RESTAURANT.getId()));
+    }
+
+    @Test
     void update() {
         EGG.setPrice(370.00);
-        mealService.update(PEPERONI.getId(), EGG);
+        mealService.update(EGG);
         assertEquals(EGG, mealService.getById(PEPERONI.getId(), EGG.getId()));
     }
 
-//    @Test
-//    void updateNotFound() {
-//        assertThrows(NotFoundException.class, () ->
-//                mealService.update(MINDAL.getId(), NON_EXISTENT_MEAL));
-//    }
+    @Test
+    void updateNotFound() {
+        assertThrows(NotFoundException.class, () ->
+                mealService.update(NOT_EXISTENT_MEAL));
+    }
 
     @Test
     void deleteById() {
@@ -60,9 +67,9 @@ class MealServiceTest {
         assertEquals(ALL_PEPERONI_MEALS_WITHOUT_EGGPLANT, mealService.getAllByRestaurantId(PEPERONI.getId()));
     }
 
-//    @Test
-//    void deleteNotFoundById() {
-//        assertThrows(NotFoundException.class, () ->
-//                mealService.deleteById(MINDAL.getId(), NON_EXISTENT_MEAL.getId()));
-//    }
+    @Test
+    void deleteNotFoundById() {
+        assertThrows(NotFoundException.class, () ->
+                mealService.deleteById(MINDAL.getId(), NOT_EXISTENT_MEAL.getId()));
+    }
 }

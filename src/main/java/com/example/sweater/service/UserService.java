@@ -10,6 +10,10 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
+import static com.example.sweater.util.ValidationUtil.checkNotFound;
+import static com.example.sweater.util.ValidationUtil.checkNotFoundObjectWithId;
+import static com.example.sweater.util.ValidationUtil.checkNotFoundWithId;
+
 @Service
 public class UserService {
 
@@ -22,17 +26,18 @@ public class UserService {
         this.crudUserRepository = crudUserRepository;
     }
 
-    public User addNew(User user){
+    public User addNew(User user) {
         Assert.notNull(user, "user must not be null");
         return crudUserRepository.save(user);
     }
 
     public User getById(Integer id) throws NotFoundException {
-        return crudUserRepository.findById(id).orElse(null);
+        return checkNotFoundObjectWithId(crudUserRepository.findById(id).orElse(null), id);
     }
 
     public User getByEmail(String email) throws NotFoundException {
-        return crudUserRepository.findUserByEmail(email);
+        Assert.notNull(email, "email must not be null");
+        return checkNotFound(crudUserRepository.findUserByEmail(email), "email=" + email);
     }
 
     public List<User> getAll() {
@@ -41,10 +46,11 @@ public class UserService {
 
     public void update(Integer id, User user) throws NotFoundException {
         Assert.notNull(user, "user must not be null");
+        checkNotFoundObjectWithId(getById(user.getId()), id);
         crudUserRepository.save(user);
     }
 
     public void deleteById(Integer id) throws NotFoundException {
-        crudUserRepository.deleteById(id);
+        checkNotFoundWithId(crudUserRepository.delete(id) != 0, id);
     }
 }

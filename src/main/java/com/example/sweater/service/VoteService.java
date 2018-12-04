@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.example.sweater.util.ValidationUtil.checkNotFoundObjectWithId;
+
 @Service
 public class VoteService {
 
@@ -31,11 +33,11 @@ public class VoteService {
     }
 
     public Vote getById(Integer voteId) throws NotFoundException {
-        return crudVoteRepository.findById(voteId).orElse(null);
+        return checkNotFoundObjectWithId(crudVoteRepository.findById(voteId).orElse(null), voteId);
     }
 
-    //for tests
     public List<VoteTO> getAllByUser(User user) {
+        Assert.notNull(user, "user must not be null");
         return crudVoteRepository.findAllByUser(user).stream()
                 .map(vote -> new VoteTO(
                         LocalDateTime.of(vote.getDate(), vote.getTime()),

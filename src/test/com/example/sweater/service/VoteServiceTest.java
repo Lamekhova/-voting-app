@@ -2,6 +2,7 @@ package com.example.sweater.service;
 
 import com.example.sweater.model.Vote;
 import com.example.sweater.to.VoteTO;
+import com.example.sweater.util.exception.NotFoundException;
 import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsMapContaining;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,7 @@ import static com.example.sweater.UserTestData.SUE;
 import static com.example.sweater.VoteTestData.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -37,14 +39,14 @@ class VoteServiceTest {
         assertEquals(VOTE_2, voteService.getById(VOTE_2.getId()));
     }
 
-//    @Test
-//    void getNotFoundById() {
-//        assertThrows(NotFoundException.class, () ->
-//                voteService.getById(NOT_EXISTENT_VOTE.getId()));
-//    }
+    @Test
+    void getNotFoundById() {
+        assertThrows(NotFoundException.class, () ->
+                voteService.getById(NOT_EXISTENT_VOTE.getId()));
+    }
 
     @Test
-    void getAllByUserId() {
+    void getAllByUser() {
         List<VoteTO> userVotes = voteService.getAllByUser(SUE);
         assertEquals(2, userVotes.size());
         assertEquals(VOTE_3.getRestaurant().getId(), userVotes.get(0).getRestaurantId());

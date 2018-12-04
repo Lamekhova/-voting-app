@@ -2,17 +2,13 @@ package com.example.sweater.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@NamedEntityGraph(name = User.GRAPH_WITH_VOTE_HISTORY, includeAllAttributes = true)
 @Table(name = "users")
 public class User extends AbstractNameEntity{
-
-    public static final String GRAPH_WITH_VOTE_HISTORY = "User.withVotes";
 
     @NotBlank
     @Email

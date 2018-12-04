@@ -69,5 +69,4 @@ public class Meal extends AbstractNameEntity {
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
     }
-
 }

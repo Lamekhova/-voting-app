@@ -1,6 +1,7 @@
 package com.example.sweater.service;
 
 import com.example.sweater.model.Restaurant;
+import com.example.sweater.util.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +43,11 @@ class RestaurantServiceTest {
         assertEquals(PEPERONI, restaurantService.getById(100005));
     }
 
-//    @Test
-//    void getNotFoundById() {
-//        assertThrows(NotFoundException.class, () ->
-//                restaurantService.getById(NON_EXISTENT_RESTAURANT.getId()));
-//    }
+    @Test
+    void getNotFoundById() {
+        assertThrows(NotFoundException.class, () ->
+                restaurantService.getById(NOT_EXISTENT_RESTAURANT.getId()));
+    }
 
     @Test
     void getAll() {
@@ -70,23 +71,22 @@ class RestaurantServiceTest {
         assertEquals(PERCHINI, restaurantService.getById(PERCHINI.getId()));
     }
 
-//    @Test
-//    void updateNotFound() {
-//        assertThrows(NotFoundException.class, () ->
-//                restaurantService.update(NON_EXISTENT_RESTAURANT.getId(), NON_EXISTENT_RESTAURANT));
-//    }
+    @Test
+    void updateNotFound() {
+        assertThrows(NotFoundException.class, () ->
+                restaurantService.update(NOT_EXISTENT_RESTAURANT));
+    }
 
-    //?
     @Test
     void deleteById() {
         restaurantService.deleteById(100007);
         assertEquals(RESTAURANT_LIST_WITHOUT_MINDAL, restaurantService.getAll());
     }
 
-//    @Test
-//    void deleteNotFoundById() {
-//        assertThrows(NotFoundException.class, () ->
-//                restaurantService.deleteById(NON_EXISTENT_RESTAURANT.getId()));
-//
-//    }
+    @Test
+    void deleteNotFoundById() {
+        assertThrows(NotFoundException.class, () ->
+                restaurantService.deleteById(NOT_EXISTENT_RESTAURANT.getId()));
+
+    }
 }

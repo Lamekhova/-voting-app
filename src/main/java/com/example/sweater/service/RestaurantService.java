@@ -11,6 +11,9 @@ import org.springframework.util.Assert;
 import java.time.LocalDate;
 import java.util.List;
 
+import static com.example.sweater.util.ValidationUtil.checkNotFoundObjectWithId;
+import static com.example.sweater.util.ValidationUtil.checkNotFoundWithId;
+
 @Service
 public class RestaurantService {
 
@@ -29,24 +32,25 @@ public class RestaurantService {
     }
 
     public Restaurant getById(Integer id) throws NotFoundException {
-        return crudRestaurantRepository.findById(id).orElse(null);
+        return checkNotFoundObjectWithId(crudRestaurantRepository.findById(id).orElse(null), id);
     }
 
     public List<Restaurant> getAll() {
         return crudRestaurantRepository.findAll(SORT_NAME);
     }
 
-    public List<Restaurant> getAllWithMealsByDate(LocalDate localDate) throws NotFoundException {
+    public List<Restaurant> getAllWithMealsByDate(LocalDate localDate) {
         Assert.notNull(localDate, "local date must not be null");
         return crudRestaurantRepository.findAllWithMealsByDate(localDate);
     }
 
     public void update(Restaurant restaurant) throws NotFoundException {
         Assert.notNull(restaurant, "restaurant must not be null");
+        checkNotFoundObjectWithId(getById(restaurant.getId()), restaurant.getId());
         crudRestaurantRepository.save(restaurant);
     }
 
     public void deleteById(Integer id) throws NotFoundException {
-        crudRestaurantRepository.deleteById(id);
+        checkNotFoundWithId(crudRestaurantRepository.delete(id) != 0, id);
     }
 }
