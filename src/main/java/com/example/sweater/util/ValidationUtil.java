@@ -1,7 +1,12 @@
 package com.example.sweater.util;
 
 import com.example.sweater.model.AbstractBaseEntity;
+import com.example.sweater.util.exception.LateToChangeVote;
 import com.example.sweater.util.exception.NotFoundException;
+
+import java.time.LocalTime;
+
+import static com.example.sweater.util.TimeUtil.getVoteFinishTime;
 
 public class ValidationUtil {
 
@@ -24,6 +29,12 @@ public class ValidationUtil {
     public static void checkNotFound(boolean found, String msg) {
         if (!found) {
             throw new NotFoundException("Not found entity with " + msg);
+        }
+    }
+
+    public static void checkLateToChangeVote(){
+        if (!LocalTime.now().isBefore(getVoteFinishTime())){
+            throw new LateToChangeVote("Vote can't be changed");
         }
     }
 

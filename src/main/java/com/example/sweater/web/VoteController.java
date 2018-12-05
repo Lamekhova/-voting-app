@@ -1,5 +1,6 @@
 package com.example.sweater.web;
 
+import com.example.sweater.model.User;
 import com.example.sweater.model.Vote;
 import com.example.sweater.service.UserService;
 import com.example.sweater.service.VoteService;
@@ -27,8 +28,9 @@ public class VoteController {
     }
 
     @PostMapping(value = "/votes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Vote addNew(@RequestBody Vote vote) {
-        return voteService.addNew(vote);
+    public Vote addNew(@RequestParam(value = "restaurantId") Integer restaurantId) {
+        User user = null;
+        return voteService.addNew(restaurantId, user);
     }
 
     //for tests
@@ -44,7 +46,7 @@ public class VoteController {
 
     @GetMapping(value = "/votes/result", produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, Integer> getVoteResultByDate(@RequestParam(value = "date", required = false)
-                                 @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate) {
+                                                    @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate) {
         return voteService.getVoteResultByDate(localDate == null ? LocalDate.now() : localDate);
     }
 }

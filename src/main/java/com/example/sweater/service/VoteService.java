@@ -1,7 +1,9 @@
 package com.example.sweater.service;
 
+import com.example.sweater.model.Restaurant;
 import com.example.sweater.model.User;
 import com.example.sweater.model.Vote;
+import com.example.sweater.repository.CrudRestaurantRepository;
 import com.example.sweater.repository.CrudVoteRepository;
 import com.example.sweater.to.VoteTO;
 import com.example.sweater.util.exception.LateToChangeVote;
@@ -15,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.example.sweater.util.ValidationUtil.checkLateToChangeVote;
 import static com.example.sweater.util.ValidationUtil.checkNotFoundObjectWithId;
 
 @Service
@@ -22,13 +25,20 @@ public class VoteService {
 
     private final CrudVoteRepository crudVoteRepository;
 
+    private final CrudRestaurantRepository crudRestaurantRepository;
+
     @Autowired
-    public VoteService(CrudVoteRepository crudVoteRepository) {
+    public VoteService(CrudVoteRepository crudVoteRepository, CrudRestaurantRepository crudRestaurantRepository) {
         this.crudVoteRepository = crudVoteRepository;
+        this.crudRestaurantRepository = crudRestaurantRepository;
     }
 
-    public Vote addNew(Vote vote) throws LateToChangeVote {
-        Assert.notNull(vote, "vote must not be null");
+    public Vote addNew(Integer restaurantId, User user) throws LateToChangeVote {
+        Assert.notNull(user, "user must not be null");
+        checkLateToChangeVote();
+        Restaurant restaurant = crudRestaurantRepository.findRestaurantById(restaurantId);
+        checkNotFoundObjectWithId(restaurant, restaurantId);
+        Vote vote = new Vote(LocalDateTime.now(), user, crudRestaurantRepository.findRestaurantById(restaurantId));
         return crudVoteRepository.save(vote);
     }
 
@@ -46,11 +56,11 @@ public class VoteService {
                 .collect(Collectors.toList());
     }
 
-    public Map<String, Integer> getVoteResultByDate(LocalDate date){
+    public Map<String, Integer> getVoteResultByDate(LocalDate date) {
         Map<String, Integer> restaurantNameToNumberOfVotesMap = new HashMap<>();
         List<Vote> votesByDate = crudVoteRepository.getAllByDate(date);
         for (Vote vote : votesByDate) {
-            restaurantNameToNumberOfVotesMap.merge(vote.getRestaurant().getName(), 1, (a,b) -> a + b);
+            restaurantNameToNumberOfVotesMap.merge(vote.getRestaurant().getName(), 1, (a, b) -> a + b);
         }
         return restaurantNameToNumberOfVotesMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))

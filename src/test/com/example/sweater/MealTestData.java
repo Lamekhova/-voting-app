@@ -28,7 +28,7 @@ public class MealTestData {
 
     public static final Meal STEAK = new Meal("Beef steak", 590.00, LocalDate.now(), MINDAL);
 
-    public static final Meal NOT_EXISTENT_MEAL = new Meal(1,"Fried crocodile", 900.00, LocalDate.now(), MINDAL);
+    public static final Meal NOT_EXISTENT_MEAL = new Meal(1, "Fried crocodile", 900.00, LocalDate.now(), MINDAL);
 
     public static final List<Meal> ALL_PEPERONI_MEALS = List.of(EGGPLANT, BURGER, EGG, QUESADILLA, PASTA, FONDANT);
     public static final List<Meal> ALL_PEPERONI_MEALS_WITHOUT_EGGPLANT = List.of(BURGER, EGG, QUESADILLA, PASTA, FONDANT);

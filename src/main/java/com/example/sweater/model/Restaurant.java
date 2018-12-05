@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @NamedEntityGraph(name = Restaurant.GRAPH_WITH_MEALS, includeAllAttributes = true)
 @Table(name = "restaurants")
-public class Restaurant extends AbstractNameEntity{
+public class Restaurant extends AbstractNameEntity {
 
     public static final String GRAPH_WITH_MEALS = "Restaurant.withMeals";
 

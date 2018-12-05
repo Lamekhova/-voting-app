@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
-public class User extends AbstractNameEntity{
+public class User extends AbstractNameEntity {
 
     @NotBlank
     @Email

@@ -62,5 +62,4 @@ class VoteServiceTest {
         assertThat(map, IsMapContaining.hasEntry("Peperoni", 2));
     }
 
-
 }
