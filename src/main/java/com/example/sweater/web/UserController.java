@@ -18,33 +18,34 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    //?
+    @PostMapping(value = "rest/users", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public User addNew(@RequestBody User user) {
         return userService.addNew(user);
     }
 
-    @GetMapping(value = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "rest/admin/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public User getById(@PathVariable Integer id) {
         return userService.getById(id);
     }
 
-    @GetMapping(value = "/users/by", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "rest/admin/users/by", produces = MediaType.APPLICATION_JSON_VALUE)
     public User getByEmail(@RequestParam(name = "email") String email) {
         return userService.getByEmail(email);
     }
 
-    @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "rest/admin/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAll() {
         return userService.getAll();
     }
 
-    @PutMapping(value = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "rest/profile/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@PathVariable("id") Integer id,
                        @RequestBody User user) {
         userService.update(id, user);
     }
 
-    @DeleteMapping(value = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "rest/admin/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteById(@PathVariable Integer id) {
         userService.deleteById(id);
     }

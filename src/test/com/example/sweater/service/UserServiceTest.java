@@ -23,7 +23,8 @@ class UserServiceTest {
     @Test
     void addNew() {
         User user = userService.addNew(MARRY);
-        assertEquals(user, userService.getById(user.getId()));
+        MARRY.setId(user.getId());
+        assertEquals(MARRY, user);
     }
 
     @Test

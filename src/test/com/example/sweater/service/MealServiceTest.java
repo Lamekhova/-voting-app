@@ -9,7 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static com.example.sweater.MealTestData.*;
-import static com.example.sweater.RestaurantTestData.*;
+import static com.example.sweater.RestaurantTestData.MINDAL;
+import static com.example.sweater.RestaurantTestData.NOT_EXISTENT_RESTAURANT;
+import static com.example.sweater.RestaurantTestData.PEPERONI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

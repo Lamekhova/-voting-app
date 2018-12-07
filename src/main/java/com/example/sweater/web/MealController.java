@@ -18,31 +18,31 @@ public class MealController {
         this.mealService = mealService;
     }
 
-    @PostMapping(value = "/meals/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "rest/admin/meals/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Meal addNew(@PathVariable Integer restaurantId,
                        @RequestBody Meal meal) {
         return mealService.addNew(restaurantId, meal);
     }
 
-    @GetMapping(value = "/meals/restaurant/{restaurantId}/meal/{mealId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "rest/meals/restaurant/{restaurantId}/meal/{mealId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Meal getById(@PathVariable Integer restaurantId,
                         @PathVariable Integer mealId) {
         return mealService.getById(restaurantId, mealId);
     }
 
-    @GetMapping(value = "/meals/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "rest/admin/meals/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Meal> getAllByRestaurantId(@PathVariable Integer restaurantId) {
         return mealService.getAllByRestaurantId(restaurantId);
     }
 
-    @PutMapping(value = "/meals/{mealId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "rest/admin/meals/{mealId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@PathVariable Integer mealId,
                        @RequestBody Meal meal) {
         meal.setId(mealId);
         mealService.update(meal);
     }
 
-    @DeleteMapping(value = "/meals/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "rest/admin/meals/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteById(@PathVariable Integer restaurantId,
                            @PathVariable Integer id) {
         mealService.deleteById(restaurantId, id);

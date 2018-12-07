@@ -3,10 +3,9 @@ package com.example.sweater.service;
 import com.example.sweater.model.Restaurant;
 import com.example.sweater.model.User;
 import com.example.sweater.model.Vote;
-import com.example.sweater.repository.CrudRestaurantRepository;
 import com.example.sweater.repository.CrudVoteRepository;
 import com.example.sweater.to.VoteTO;
-import com.example.sweater.util.exception.LateToChangeVote;
+import com.example.sweater.util.exception.LateToVote;
 import com.example.sweater.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.example.sweater.util.ValidationUtil.checkLateToChangeVote;
+import static com.example.sweater.util.ValidationUtil.checkLateToVote;
 import static com.example.sweater.util.ValidationUtil.checkNotFoundObjectWithId;
 
 @Service
@@ -25,20 +24,19 @@ public class VoteService {
 
     private final CrudVoteRepository crudVoteRepository;
 
-    private final CrudRestaurantRepository crudRestaurantRepository;
+    private final RestaurantService restaurantService;
 
     @Autowired
-    public VoteService(CrudVoteRepository crudVoteRepository, CrudRestaurantRepository crudRestaurantRepository) {
+    public VoteService(CrudVoteRepository crudVoteRepository, RestaurantService restaurantService) {
         this.crudVoteRepository = crudVoteRepository;
-        this.crudRestaurantRepository = crudRestaurantRepository;
+        this.restaurantService = restaurantService;
     }
 
-    public Vote addNew(Integer restaurantId, User user) throws LateToChangeVote {
+    public Vote addNew(Integer restaurantId, User user) throws LateToVote {
         Assert.notNull(user, "user must not be null");
-        checkLateToChangeVote();
-        Restaurant restaurant = crudRestaurantRepository.findRestaurantById(restaurantId);
-        checkNotFoundObjectWithId(restaurant, restaurantId);
-        Vote vote = new Vote(LocalDateTime.now(), user, crudRestaurantRepository.findRestaurantById(restaurantId));
+        checkLateToVote();
+        Restaurant restaurant = restaurantService.getById(restaurantId);
+        Vote vote = new Vote(LocalDateTime.now(), user, restaurant);
         return crudVoteRepository.save(vote);
     }
 
@@ -62,9 +60,12 @@ public class VoteService {
         for (Vote vote : votesByDate) {
             restaurantNameToNumberOfVotesMap.merge(vote.getRestaurant().getName(), 1, (a, b) -> a + b);
         }
-        return restaurantNameToNumberOfVotesMap.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        List<Map.Entry<String, Integer>> toSort = new ArrayList<>(restaurantNameToNumberOfVotesMap.entrySet());
+        toSort.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        for (Map.Entry<String, Integer> stringIntegerEntry : toSort) {
+            map.putIfAbsent(stringIntegerEntry.getKey(), stringIntegerEntry.getValue());
+        }
+        return map;
     }
 }

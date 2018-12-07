@@ -1,10 +1,14 @@
 package com.example.sweater.service;
 
+import com.example.sweater.security.UserPrincipal;
 import com.example.sweater.model.User;
 import com.example.sweater.repository.CrudUserRepository;
 import com.example.sweater.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -15,7 +19,7 @@ import static com.example.sweater.util.ValidationUtil.checkNotFoundObjectWithId;
 import static com.example.sweater.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private static final Sort SORT_NAME_EMAIL = new Sort(Sort.Direction.ASC, "name", "email");
 
@@ -52,5 +56,14 @@ public class UserService {
 
     public void deleteById(Integer id) throws NotFoundException {
         checkNotFoundWithId(crudUserRepository.delete(id) != 0, id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = crudUserRepository.findUserByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("User with email " + email + " was not found");
+        }
+        return new UserPrincipal(user);
     }
 }

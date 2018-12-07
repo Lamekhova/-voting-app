@@ -1,7 +1,6 @@
 package com.example.sweater.util;
 
-import com.example.sweater.model.AbstractBaseEntity;
-import com.example.sweater.util.exception.LateToChangeVote;
+import com.example.sweater.util.exception.LateToVote;
 import com.example.sweater.util.exception.NotFoundException;
 
 import java.time.LocalTime;
@@ -32,27 +31,27 @@ public class ValidationUtil {
         }
     }
 
-    public static void checkLateToChangeVote(){
+    public static void checkLateToVote(){
         if (!LocalTime.now().isBefore(getVoteFinishTime())){
-            throw new LateToChangeVote("Vote can't be changed");
+            throw new LateToVote("Vote can't be changed");
         }
     }
 
-    public static void checkNew(AbstractBaseEntity entity) {
-        if (!entity.isNew()) {
-            throw new IllegalArgumentException(entity + " must be new (id=null)");
-        }
-    }
+//    public static void checkNew(AbstractBaseEntity entity) {
+//        if (!entity.isNew()) {
+//            throw new IllegalArgumentException(entity + " must be new (id=null)");
+//        }
+//    }
 
     //  http://stackoverflow.com/a/28565320/548473
-    public static Throwable getRootCause(Throwable t) {
-        Throwable result = t;
-        Throwable cause;
-
-        while (null != (cause = result.getCause()) && (result != cause)) {
-            result = cause;
-        }
-        return result;
-    }
+//    public static Throwable getRootCause(Throwable t) {
+//        Throwable result = t;
+//        Throwable cause;
+//
+//        while (null != (cause = result.getCause()) && (result != cause)) {
+//            result = cause;
+//        }
+//        return result;
+//    }
 
 }

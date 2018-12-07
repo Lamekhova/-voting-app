@@ -2,6 +2,7 @@ package com.example.sweater.service;
 
 import com.example.sweater.model.Vote;
 import com.example.sweater.to.VoteTO;
+import com.example.sweater.util.exception.LateToVote;
 import com.example.sweater.util.exception.NotFoundException;
 import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsMapContaining;
@@ -12,11 +13,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.sweater.RestaurantTestData.PEPERONI;
+import static com.example.sweater.UserTestData.JOHN;
 import static com.example.sweater.UserTestData.SUE;
 import static com.example.sweater.VoteTestData.*;
+import static com.example.sweater.util.TimeUtil.setVoteFinishTime;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -29,9 +34,17 @@ class VoteServiceTest {
     private VoteService voteService;
 
     @Test
-    void addNew() {
-        Vote vote = voteService.addNew(VOTE_11);
+    void addNewSuccess() {
+        setVoteFinishTime(LocalTime.now().plusMinutes(1));
+        Vote vote = voteService.addNew(PEPERONI.getId(), JOHN);
         assertEquals(vote, voteService.getById(vote.getId()));
+    }
+
+    @Test
+    void addNewLate() {
+        setVoteFinishTime(LocalTime.now().minusMinutes(1));
+        assertThrows(LateToVote.class, () ->
+                        voteService.addNew(PEPERONI.getId(), JOHN));
     }
 
     @Test
@@ -55,11 +68,11 @@ class VoteServiceTest {
 
     @Test
     void getVoteResultByDate() {
-        Map<String, Integer> map = voteService.getVoteResultByDate(LocalDate.now());
-        assertEquals(2, map.size());
-        assertThat(map.keySet(), Matchers.contains("Perchini", "Peperoni"));
-        assertThat(map, IsMapContaining.hasEntry("Perchini", 3));
+        Map<String, Integer> map = voteService.getVoteResultByDate(LocalDate.now().minusDays(1));
+        assertEquals(3, map.size());
+        assertThat(map.keySet(), Matchers.contains("Peperoni", "Mindal", "Perchini"));
+        assertThat(map, IsMapContaining.hasEntry("Mindal", 2));
         assertThat(map, IsMapContaining.hasEntry("Peperoni", 2));
+        assertThat(map, IsMapContaining.hasEntry("Perchini", 1));
     }
-
 }

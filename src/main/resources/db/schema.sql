@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS restaurants;
 DROP TABLE IF EXISTS meals;
 DROP TABLE IF EXISTS votes;
@@ -13,6 +14,13 @@ CREATE TABLE users (
   email         VARCHAR                 NOT NULL,
   password      VARCHAR                 NOT NULL,
   CONSTRAINT users_email UNIQUE (email)
+);
+
+CREATE TABLE roles (
+  user_id      INTEGER NOT NULL,
+  role         VARCHAR(255),
+  CONSTRAINT user_roles_idx UNIQUE (user_id, role),
+  FOREIGN KEY (user_id) REFERENCES USERS (id) ON DELETE CASCADE
 );
 
 CREATE TABLE restaurants (

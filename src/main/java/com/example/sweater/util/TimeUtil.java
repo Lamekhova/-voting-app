@@ -9,4 +9,9 @@ public class TimeUtil {
     public static LocalTime getVoteFinishTime() {
         return voteFinishTime;
     }
+
+    //for tests VoteController
+    public static void setVoteFinishTime(LocalTime time){
+        voteFinishTime = time;
+    }
 }

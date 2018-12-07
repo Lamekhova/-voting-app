@@ -1,14 +1,17 @@
 package com.example.sweater.web;
 
-import com.example.sweater.model.User;
+import com.example.sweater.security.UserPrincipal;
 import com.example.sweater.model.Vote;
-import com.example.sweater.service.UserService;
 import com.example.sweater.service.VoteService;
 import com.example.sweater.to.VoteTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,32 +22,24 @@ public class VoteController {
 
     private final VoteService voteService;
 
-    private final UserService userService;
 
     @Autowired
-    public VoteController(VoteService voteService, UserService userService) {
+    public VoteController(VoteService voteService) {
         this.voteService = voteService;
-        this.userService = userService;
     }
 
-    @PostMapping(value = "/votes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Vote addNew(@RequestParam(value = "restaurantId") Integer restaurantId) {
-        User user = null;
-        return voteService.addNew(restaurantId, user);
+    @PostMapping(value = "rest/profile/votes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Vote addNew(@AuthenticationPrincipal UserPrincipal userPrincipal,
+                       @RequestParam(value = "restaurantId") Integer restaurantId) {
+        return voteService.addNew(restaurantId, userPrincipal.getUser());
     }
 
-    //for tests
-//    @GetMapping(value = "/votes/{voteId}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public Vote getById(@PathVariable Integer voteId) {
-//        return voteService.getById(voteId);
-//    }
-
-    @GetMapping(value = "/votes/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<VoteTO> getAllByUser(@PathVariable Integer userId) {
-        return voteService.getAllByUser(userService.getById(userId));
+    @GetMapping(value = "rest/profile/votes/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<VoteTO> getAllByUser(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        return voteService.getAllByUser(userPrincipal.getUser());
     }
 
-    @GetMapping(value = "/votes/result", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "rest/votes/result", produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, Integer> getVoteResultByDate(@RequestParam(value = "date", required = false)
                                                     @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate localDate) {
         return voteService.getVoteResultByDate(localDate == null ? LocalDate.now() : localDate);

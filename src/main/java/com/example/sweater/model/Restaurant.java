@@ -18,7 +18,7 @@ public class Restaurant extends AbstractNameEntity {
     private String address;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    @OrderBy("date DESC")
+    @OrderBy("date,id ASC")
     @JsonManagedReference(value = "restaurant-meals")
     private List<Meal> meals;
 
