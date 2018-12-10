@@ -1,5 +1,6 @@
 package com.example.sweater.util;
 
+import com.example.sweater.model.AbstractBaseEntity;
 import com.example.sweater.util.exception.LateToVote;
 import com.example.sweater.util.exception.NotFoundException;
 
@@ -37,11 +38,19 @@ public class ValidationUtil {
         }
     }
 
-//    public static void checkNew(AbstractBaseEntity entity) {
-//        if (!entity.isNew()) {
-//            throw new IllegalArgumentException(entity + " must be new (id=null)");
-//        }
-//    }
+    public static void checkNew(AbstractBaseEntity entity) {
+        if (!entity.isNew()) {
+            throw new IllegalArgumentException(entity + " must be new (id = null)");
+        }
+    }
+
+    public static void assureIdConsistent(AbstractBaseEntity entity, int id) {
+        if (entity.isNew()) {
+            entity.setId(id);
+        } else if (entity.getId() != id) {
+            throw new IllegalArgumentException(entity + " must be with id = " + id);
+        }
+    }
 
     //  http://stackoverflow.com/a/28565320/548473
 //    public static Throwable getRootCause(Throwable t) {

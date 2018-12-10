@@ -14,7 +14,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
 
-    @Query("SELECT DISTINCT v FROM Vote v WHERE v.user = ?1 ORDER BY v.time DESC")
+    @Query("SELECT DISTINCT v FROM Vote v WHERE v.user = ?1 ORDER BY v.date DESC")
     List<Vote> findAllByUser(User user);
 
     @Query("SELECT DISTINCT v FROM Vote v WHERE v.date = ?1 ORDER BY v.time DESC")

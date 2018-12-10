@@ -31,9 +31,6 @@ public class MealService {
         if (!meal.isNew() && getById(restaurantId, meal.getId()) == null) {
             return null;
         }
-//        Restaurant restaurant = crudRestaurantRepository.findById(restaurantId).orElse(null);
-//        checkNotFoundObjectWithId(restaurant, restaurantId);
-//        meal.setRestaurant(restaurant);
         meal.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
         return crudMealRepository.save(meal);
     }

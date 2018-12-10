@@ -14,8 +14,8 @@ import static com.example.sweater.UserTestData.*;
 
 public class VoteTestData {
 
-    public static final Vote VOTE_1 = new Vote(100020, LocalDateTime.of(LocalDate.now(), LocalTime.of(8, 30)), IVAN, PEPERONI);
-    public static final Vote VOTE_2 = new Vote(100021, LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 00)), NICOLAS, PEPERONI);
+//    public static final Vote VOTE_1 = new Vote(100020, LocalDateTime.of(LocalDate.now(), LocalTime.of(8, 30)), IVAN, PEPERONI);
+//    public static final Vote VOTE_2 = new Vote(100021, LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 00)), NICOLAS, PEPERONI);
     public static final Vote VOTE_3 = new Vote(100022, LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 00)), SUE, PERCHINI);
     public static final Vote VOTE_4 = new Vote(100023, LocalDateTime.of(LocalDate.now(), LocalTime.of(10, 30)), PERRY, PERCHINI);
     public static final Vote VOTE_5 = new Vote(100024, LocalDateTime.of(LocalDate.now(), LocalTime.of(10, 30)), JOHN, PERCHINI);
@@ -27,6 +27,4 @@ public class VoteTestData {
     public static final Vote VOTE_10 = new Vote(100029, LocalDateTime.of(LocalDate.now().minus(Period.ofDays(1)), LocalTime.of(8, 40)), JOHN, PEPERONI);
 
     public static final Vote NOT_EXISTENT_VOTE = new Vote(1, LocalDateTime.of(LocalDate.now(), LocalTime.of(8, 40)), JOHN, PEPERONI);
-
-
 }

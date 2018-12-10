@@ -49,7 +49,7 @@ class VoteServiceTest {
 
     @Test
     void getById() {
-        assertEquals(VOTE_2, voteService.getById(VOTE_2.getId()));
+        assertEquals(VOTE_4, voteService.getById(VOTE_4.getId()));
     }
 
     @Test
