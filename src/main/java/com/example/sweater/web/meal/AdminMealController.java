@@ -31,7 +31,7 @@ public class AdminMealController extends AbstractMealController {
 
     @DeleteMapping(value = "/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteById(@PathVariable Integer restaurantId,
-                           @PathVariable Integer id) {
-        super.deleteById(restaurantId, id);
+                           @PathVariable Integer mealId) {
+        super.deleteById(restaurantId, mealId);
     }
 }
