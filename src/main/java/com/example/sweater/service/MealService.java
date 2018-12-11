@@ -10,8 +10,8 @@ import org.springframework.util.Assert;
 import java.util.List;
 import java.util.Objects;
 
-import static com.example.sweater.util.ValidationUtil.checkNotFoundObjectWithId;
-import static com.example.sweater.util.ValidationUtil.checkNotFoundWithId;
+import static com.example.sweater.util.ExceptionUtil.checkNotFoundObjectWithId;
+import static com.example.sweater.util.ExceptionUtil.checkNotFoundWithId;
 
 @Service
 public class MealService {

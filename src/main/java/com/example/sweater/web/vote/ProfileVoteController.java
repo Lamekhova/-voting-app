@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(ProfileVoteController.REST_URL)
-public class ProfileVoteController extends AbstractVoteController{
+public class ProfileVoteController extends AbstractVoteController {
 
     static final String REST_URL = "rest/profile/votes/user";
 

@@ -11,8 +11,8 @@ import org.springframework.util.Assert;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.example.sweater.util.ValidationUtil.checkNotFoundObjectWithId;
-import static com.example.sweater.util.ValidationUtil.checkNotFoundWithId;
+import static com.example.sweater.util.ExceptionUtil.checkNotFoundObjectWithId;
+import static com.example.sweater.util.ExceptionUtil.checkNotFoundWithId;
 
 @Service
 public class RestaurantService {

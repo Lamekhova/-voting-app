@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.example.sweater.util.ValidationUtil.assureIdConsistent;
-import static com.example.sweater.util.ValidationUtil.checkNew;
+import static com.example.sweater.util.ExceptionUtil.assureIdConsistent;
+import static com.example.sweater.util.ExceptionUtil.checkNew;
 
 public abstract class AbstractRestaurantController {
 

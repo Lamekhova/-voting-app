@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.example.sweater.util.ValidationUtil.checkLateToVote;
-import static com.example.sweater.util.ValidationUtil.checkNotFoundObjectWithId;
+import static com.example.sweater.util.ExceptionUtil.checkLateToVote;
+import static com.example.sweater.util.ExceptionUtil.checkNotFoundObjectWithId;
 
 @Service
 public class VoteService {

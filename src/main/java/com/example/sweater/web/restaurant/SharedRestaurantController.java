@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(SharedRestaurantController.REST_URL)
-public class SharedRestaurantController extends AbstractRestaurantController{
+public class SharedRestaurantController extends AbstractRestaurantController {
 
     static final String REST_URL = "rest/restaurants";
 

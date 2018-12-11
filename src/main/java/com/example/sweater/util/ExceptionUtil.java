@@ -8,9 +8,9 @@ import java.time.LocalTime;
 
 import static com.example.sweater.util.TimeUtil.getVoteFinishTime;
 
-public class ValidationUtil {
+public class ExceptionUtil {
 
-    private ValidationUtil() {
+    private ExceptionUtil() {
     }
 
     public static <T> T checkNotFoundObjectWithId(T object, int id) {

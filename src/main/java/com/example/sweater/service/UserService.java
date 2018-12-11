@@ -14,9 +14,9 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-import static com.example.sweater.util.ValidationUtil.checkNotFound;
-import static com.example.sweater.util.ValidationUtil.checkNotFoundObjectWithId;
-import static com.example.sweater.util.ValidationUtil.checkNotFoundWithId;
+import static com.example.sweater.util.ExceptionUtil.checkNotFound;
+import static com.example.sweater.util.ExceptionUtil.checkNotFoundObjectWithId;
+import static com.example.sweater.util.ExceptionUtil.checkNotFoundWithId;
 
 @Service
 public class UserService implements UserDetailsService {
