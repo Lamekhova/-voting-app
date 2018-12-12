@@ -10,8 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static com.example.sweater.UserTestData.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -23,6 +22,7 @@ class UserServiceTest {
     @Test
     void addNew() {
         User user = userService.addNew(MARRY);
+        assertNotNull(user);
         MARRY.setId(user.getId());
         assertEquals(MARRY, user);
     }

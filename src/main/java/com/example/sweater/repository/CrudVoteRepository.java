@@ -19,5 +19,4 @@ public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
 
     @Query("SELECT DISTINCT v FROM Vote v WHERE v.date = ?1 ORDER BY v.time DESC")
     List<Vote> getAllByDate(LocalDate date);
-
 }

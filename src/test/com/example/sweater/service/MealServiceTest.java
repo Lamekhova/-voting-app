@@ -13,6 +13,7 @@ import static com.example.sweater.RestaurantTestData.MINDAL;
 import static com.example.sweater.RestaurantTestData.NOT_EXISTENT_RESTAURANT;
 import static com.example.sweater.RestaurantTestData.PEPERONI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
@@ -25,7 +26,12 @@ class MealServiceTest {
     @Test
     void addNew() {
         Meal meal = mealService.addNew(MINDAL.getId(), STEAK);
-        assertEquals(STEAK, mealService.getById(MINDAL.getId(), meal.getId()));
+        assertNotNull(meal);
+        try {
+            assertEquals(STEAK, mealService.getById(MINDAL.getId(), meal.getId()));
+        } finally {
+            mealService.deleteById(MINDAL.getId(), meal.getId());
+        }
     }
 
     @Test

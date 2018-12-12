@@ -2,8 +2,6 @@ package com.example.sweater.repository;
 
 import com.example.sweater.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +11,11 @@ public interface CrudUserRepository extends JpaRepository<User, Integer> {
 
     User findUserByEmail(String email);
 
+//    @Transactional
+//    @Modifying
+//    @Query("DELETE FROM User u WHERE u.id=?1")
+//    int delete(Integer id);
+
     @Transactional
-    @Modifying
-    @Query("DELETE FROM User u WHERE u.id=?1")
-    int delete(Integer id);
+    int removeById(int id);
 }

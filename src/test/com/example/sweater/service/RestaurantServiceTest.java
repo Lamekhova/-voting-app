@@ -16,6 +16,7 @@ import static com.example.sweater.MealTestData.PEPERONI_MEALS_TODAY;
 import static com.example.sweater.MealTestData.PERCHINI_MEALS_TODAY;
 import static com.example.sweater.RestaurantTestData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
@@ -29,6 +30,7 @@ class RestaurantServiceTest {
     @Test
     void addNew() {
         Restaurant restaurant = restaurantService.addNew(WOOD);
+        assertNotNull(restaurant);
         assertEquals(restaurant, restaurantService.getById(restaurant.getId()));
     }
 
@@ -60,6 +62,7 @@ class RestaurantServiceTest {
         PERCHINI.setMeals(PERCHINI_MEALS_TODAY);
         List<Restaurant> list = restaurantService.getAllWithMealsByDate(LocalDate.now());
         assertEquals(List.of(PEPERONI, PERCHINI), list);
+        System.out.println(list.get(0).getName() + "\t" + list.get(1).getName());
         assertEquals(PEPERONI.getMeals(), list.get(0).getMeals());
         assertEquals(PERCHINI.getMeals(), list.get(1).getMeals());
     }

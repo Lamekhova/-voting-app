@@ -24,6 +24,7 @@ import static com.example.sweater.VoteTestData.*;
 import static com.example.sweater.util.TimeUtil.setVoteFinishTime;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
@@ -37,6 +38,7 @@ class VoteServiceTest {
     void addNewSuccess() {
         setVoteFinishTime(LocalTime.now().plusMinutes(1));
         Vote vote = voteService.addNew(PEPERONI.getId(), JOHN);
+        assertNotNull(vote);
         assertEquals(vote, voteService.getById(vote.getId()));
     }
 

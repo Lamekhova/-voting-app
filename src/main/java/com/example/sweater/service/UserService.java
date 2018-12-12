@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void deleteById(Integer id) throws NotFoundException {
-        checkNotFoundWithId(crudUserRepository.delete(id) != 0, id);
+        checkNotFoundWithId(crudUserRepository.removeById(id) != 0, id);
     }
 
     @Override
