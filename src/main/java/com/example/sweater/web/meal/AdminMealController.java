@@ -1,9 +1,11 @@
 package com.example.sweater.web.meal;
 
 import com.example.sweater.model.Meal;
+import com.example.sweater.to.MealTO;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -14,8 +16,8 @@ public class AdminMealController extends AbstractMealController {
 
     @PostMapping(value = "/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Meal addNew(@PathVariable Integer restaurantId,
-                       @RequestBody Meal meal) {
-        return super.addNew(restaurantId, meal);
+                       @Valid @RequestBody MealTO mealTO) {
+        return super.addNew(restaurantId, mealTO);
     }
 
     @GetMapping(value = "/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)

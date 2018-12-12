@@ -1,6 +1,7 @@
 package com.example.sweater;
 
 import com.example.sweater.model.Meal;
+import com.example.sweater.to.MealTO;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -26,7 +27,7 @@ public class MealTestData {
     public static final Meal PANCAKE = new Meal(100018, "Pancake with meat", 108.00, LocalDate.now().minus(Period.ofDays(1)), PERCHINI);
     public static final Meal RABBIT = new Meal(100019, "Grilled rabbit", 180.00, LocalDate.now().minus(Period.ofDays(1)), PERCHINI);
 
-    public static final Meal STEAK = new Meal("Beef steak", 590.00, LocalDate.now(), MINDAL);
+    public static final MealTO STEAK = new MealTO(null,"Beef steak", 590.00);
 
     public static final Meal NOT_EXISTENT_MEAL = new Meal(1, "Fried crocodile", 900.00, LocalDate.now(), MINDAL);
 

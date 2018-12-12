@@ -2,6 +2,7 @@ package com.example.sweater.web.meal;
 
 import com.example.sweater.model.Meal;
 import com.example.sweater.service.MealService;
+import com.example.sweater.to.MealTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 import static com.example.sweater.util.ExceptionUtil.assureIdConsistent;
-import static com.example.sweater.util.ExceptionUtil.checkNew;
 
 public abstract class AbstractMealController {
 
@@ -18,10 +18,9 @@ public abstract class AbstractMealController {
     @Autowired
     private MealService mealService;
 
-    public Meal addNew(Integer restaurantId, Meal meal) {
-        log.info("add new meal {} for restaurant with id {}", meal, restaurantId);
-        checkNew(meal);
-        return mealService.addNew(restaurantId, meal);
+    public Meal addNew(Integer restaurantId, MealTO mealTO) {
+        log.info("add new meal {} for restaurant with id {}", mealTO, restaurantId);
+        return mealService.addNew(restaurantId, mealTO);
     }
 
     public Meal getById(Integer restaurantId, Integer mealId) {

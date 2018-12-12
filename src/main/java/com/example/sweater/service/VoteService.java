@@ -1,6 +1,5 @@
 package com.example.sweater.service;
 
-import com.example.sweater.model.Restaurant;
 import com.example.sweater.model.User;
 import com.example.sweater.model.Vote;
 import com.example.sweater.repository.CrudVoteRepository;
@@ -35,8 +34,11 @@ public class VoteService {
     public Vote addNew(Integer restaurantId, User user) throws LateToVote {
         Assert.notNull(user, "user must not be null");
         checkLateToVote();
-        Restaurant restaurant = restaurantService.getById(restaurantId);
-        Vote vote = new Vote(LocalDateTime.now(), user, restaurant);
+        Vote vote = new Vote(
+                LocalDateTime.now(),
+                user,
+                restaurantService.getById(restaurantId)
+        );
         return crudVoteRepository.save(vote);
     }
 
