@@ -35,7 +35,7 @@ public class MealService {
         return crudMealRepository.save(meal);
     }
 
-    public Meal getById(Integer restaurantId, Integer mealId) {
+    public Meal getById(Integer mealId, Integer restaurantId) {
         Meal meal = crudMealRepository.getById(mealId);
         if (!(meal != null && meal.getRestaurant() != null
                 && Objects.equals(meal.getRestaurant().getId(), restaurantId))) {

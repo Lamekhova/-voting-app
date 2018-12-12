@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import java.time.LocalDate;
 import java.util.List;
 
+import static com.example.sweater.util.ExceptionUtil.checkNew;
 import static com.example.sweater.util.ExceptionUtil.checkNotFoundObjectWithId;
 import static com.example.sweater.util.ExceptionUtil.checkNotFoundWithId;
 
@@ -28,6 +29,7 @@ public class RestaurantService {
 
     public Restaurant addNew(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
+        checkNew(restaurant);
         return crudRestaurantRepository.save(restaurant);
     }
 
