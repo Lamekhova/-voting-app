@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping(ProfileVoteController.REST_URL)
 public class ProfileVoteController extends AbstractVoteController {
 
-    static final String REST_URL = "rest/profile/votes/user";
+    static final String REST_URL = "/rest/profile/votes";
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Vote addNew(@AuthenticationPrincipal UserPrincipal userPrincipal,

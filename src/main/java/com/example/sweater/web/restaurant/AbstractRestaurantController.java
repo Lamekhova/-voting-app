@@ -26,7 +26,7 @@ public abstract class AbstractRestaurantController {
     }
 
     /**
-     * @param localDate is optional, if the parameter value is not passed, it is equal to the current date
+     * @param localDate is optional, if the parameter date is not passed, it is equal to the current date
      * @return Restaurants with available meals for requested date
      */
 

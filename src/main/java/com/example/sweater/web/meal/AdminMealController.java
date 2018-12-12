@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping(AdminMealController.REST_URL)
 public class AdminMealController extends AbstractMealController {
 
-    static final String REST_URL = "rest/admin/meals";
+    static final String REST_URL = "/rest/admin/meals";
 
     @PostMapping(value = "/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Meal addNew(@PathVariable Integer restaurantId,
@@ -23,13 +23,13 @@ public class AdminMealController extends AbstractMealController {
         return super.getAllByRestaurantId(restaurantId);
     }
 
-    @PutMapping(value = "/{mealId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{mealId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@PathVariable Integer mealId,
                        @RequestBody Meal meal) {
         super.update(mealId, meal);
     }
 
-    @DeleteMapping(value = "/restaurant/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/restaurant/{restaurantId}/meal/{mealId}")
     public void deleteById(@PathVariable Integer restaurantId,
                            @PathVariable Integer mealId) {
         super.deleteById(restaurantId, mealId);

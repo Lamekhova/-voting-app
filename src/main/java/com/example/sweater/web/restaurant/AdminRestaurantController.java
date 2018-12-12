@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping(AdminRestaurantController.REST_URL)
 public class AdminRestaurantController extends AbstractRestaurantController {
 
-    static final String REST_URL = "rest/admin/restaurants";
+    static final String REST_URL = "/rest/admin/restaurants";
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant addNew(@RequestBody Restaurant restaurant) {
@@ -22,7 +22,7 @@ public class AdminRestaurantController extends AbstractRestaurantController {
         return super.getAll();
     }
 
-    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@PathVariable("id") Integer id,
                        @RequestBody Restaurant restaurant) {
         super.update(id, restaurant);

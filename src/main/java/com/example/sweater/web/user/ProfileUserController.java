@@ -1,28 +1,30 @@
 package com.example.sweater.web.user;
 
 import com.example.sweater.model.User;
+import com.example.sweater.security.UserPrincipal;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(ProfileUserController.REST_URL)
 public class ProfileUserController extends AbstractUserController {
 
-    static final String REST_URL = "rest/profile/users/";
+    static final String REST_URL = "/rest/profile";
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User getById(@PathVariable Integer id) {
-        return super.getById(id);
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public User get(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        return super.getById(userPrincipal.getUserId());
     }
 
-    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@PathVariable("id") Integer id,
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@AuthenticationPrincipal UserPrincipal userPrincipal,
                        @RequestBody User user) {
-        super.update(id, user);
+        super.update(userPrincipal.getUserId(), user);
     }
 
-    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteById(@PathVariable Integer id) {
-        super.deleteById(id);
+    @DeleteMapping
+    public void delete(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        super.deleteById(userPrincipal.getUserId());
     }
 }

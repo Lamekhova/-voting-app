@@ -32,13 +32,13 @@ public class AdminUserController extends AbstractUserController {
         return super.getAll();
     }
 
-    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@PathVariable("id") Integer id,
                        @RequestBody User user) {
         super.update(id, user);
     }
 
-    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{id}")
     public void deleteById(@PathVariable Integer id) {
         super.deleteById(id);
     }
