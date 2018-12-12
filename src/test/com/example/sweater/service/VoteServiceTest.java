@@ -35,7 +35,7 @@ class VoteServiceTest {
     private VoteService voteService;
 
     @Test
-    void addNewSuccess() {
+    void addNewJustInTime() {
         setVoteFinishTime(LocalTime.now().plusMinutes(1));
         Vote vote = voteService.addNew(PEPERONI.getId(), JOHN);
         assertNotNull(vote);
@@ -51,7 +51,9 @@ class VoteServiceTest {
 
     @Test
     void getById() {
-        assertEquals(VOTE_4, voteService.getById(VOTE_4.getId()));
+        Vote vote = voteService.getById(VOTE_4.getId());
+        assertEquals(VOTE_4.getUser(), vote.getUser());
+        assertEquals(VOTE_4.getRestaurant(), vote.getRestaurant());
     }
 
     @Test

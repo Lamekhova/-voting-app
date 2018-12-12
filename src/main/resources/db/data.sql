@@ -33,8 +33,6 @@ VALUES ('Spicy grilled eggplant',                350.0, CURRENT_DATE,           
        ('Grilled rabbit',                        180.0, DATEADD('DAY', -1, CURRENT_DATE), 100006);
 
 INSERT INTO votes (user_id, restaurant_id, date, time) VALUES
---        ('100000', '100005', CURRENT_DATE,                     '08:30:00'),
---        ('100001', '100005', CURRENT_DATE,                     '09:00:00'),
        ('100002', '100006', CURRENT_DATE,                     '09:00:00'),
        ('100003', '100006', CURRENT_DATE,                     '10:30:00'),
        ('100004', '100006', CURRENT_DATE,                     '10:30:00'),
