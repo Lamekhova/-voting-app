@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static com.example.sweater.util.ExceptionUtil.assureIdConsistent;
-
 public abstract class AbstractMealController {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -33,15 +31,13 @@ public abstract class AbstractMealController {
         return mealService.getAllByRestaurantId(restaurantId);
     }
 
-    public void update(Integer mealId, Meal meal) {
-        log.info("update meal {} with id {}", meal, mealId);
-        assureIdConsistent(meal, mealId);
-        meal.setId(mealId);
-        mealService.update(meal);
+    public void update(Integer mealId, Integer restaurantId, MealTO mealTO) {
+        log.info("update meal with id {} owned by a restaurant with id {}", mealId, restaurantId);
+        mealService.update(mealId, restaurantId, mealTO);
     }
 
-    public void deleteById(Integer restaurantId, Integer mealId) {
+    public void deleteById(Integer mealId, Integer restaurantId) {
         log.info("delete meal with id {} owned by a restaurant with id {}", mealId, restaurantId);
-        mealService.deleteById(restaurantId, mealId);
+        mealService.deleteById(mealId, restaurantId);
     }
 }

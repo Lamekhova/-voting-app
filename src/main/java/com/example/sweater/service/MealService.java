@@ -6,15 +6,12 @@ import com.example.sweater.repository.CrudRestaurantRepository;
 import com.example.sweater.to.MealTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-import static com.example.sweater.util.ExceptionUtil.checkNew;
-import static com.example.sweater.util.ExceptionUtil.checkNotFoundObjectWithId;
-import static com.example.sweater.util.ExceptionUtil.checkNotFoundWithId;
+import static com.example.sweater.util.ExceptionUtil.*;
 
 @Service
 public class MealService {
@@ -33,13 +30,7 @@ public class MealService {
     }
 
     public Meal addNew(Integer restaurantId, MealTO mealTO) {
-        Meal meal = new Meal(
-                mealTO.getId(),
-                mealTO.getName(),
-                mealTO.getPrice(),
-                LocalDate.now(),
-                restaurantService.getById(restaurantId)
-        );
+        Meal meal = createMealFromMealTO(mealTO, restaurantId);
         checkNew(meal);
         return crudMealRepository.save(meal);
     }
@@ -58,13 +49,25 @@ public class MealService {
         return crudMealRepository.findMealsByRestaurantIdOrderByDateDesc(restaurantId);
     }
 
-    public void update(Meal meal) {
-        Assert.notNull(meal, "meal must not be null");
-        checkNotFoundObjectWithId(crudMealRepository.getById(meal.getId()), meal.getId());
+    public void update(Integer mealId, Integer restaurantId, MealTO mealTO) {
+        Meal meal = createMealFromMealTO(mealTO, restaurantId);
+        meal.setId(mealId);
+        checkNotFoundObjectWithId(crudMealRepository.getById(mealId), mealId);
         crudMealRepository.save(meal);
     }
 
-    public void deleteById(Integer restaurantId, Integer mealId) {
+    public void deleteById(Integer mealId, Integer restaurantId) {
         checkNotFoundWithId(crudMealRepository.deleteById(restaurantId, mealId) != 0, mealId);
+    }
+
+    private Meal createMealFromMealTO(MealTO mealTO, Integer restaurantId) {
+        Meal meal = new Meal(
+                mealTO.getId(),
+                mealTO.getName(),
+                mealTO.getPrice(),
+                LocalDate.now(),
+                restaurantService.getById(restaurantId)
+        );
+        return meal;
     }
 }

@@ -54,18 +54,18 @@ class MealServiceTest {
                 mealService.getAllByRestaurantId(NOT_EXISTENT_RESTAURANT.getId()));
     }
 
-    @Test
-    void update() {
-        EGG.setPrice(370.00);
-        mealService.update(EGG);
-        assertEquals(EGG, mealService.getById(PEPERONI.getId(), EGG.getId()));
-    }
-
-    @Test
-    void updateNotFound() {
-        assertThrows(NotFoundException.class, () ->
-                mealService.update(NOT_EXISTENT_MEAL));
-    }
+//    @Test
+//    void update() {
+//        EGG.setPrice(370.00);
+//        mealService.update(EGG);
+//        assertEquals(EGG, mealService.getById(PEPERONI.getId(), EGG.getId()));
+//    }
+//
+//    @Test
+//    void updateNotFound() {
+//        assertThrows(NotFoundException.class, () ->
+//                mealService.update(NOT_EXISTENT_MEAL));
+//    }
 
     @Test
     void deleteById() {

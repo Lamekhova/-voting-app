@@ -25,15 +25,16 @@ public class AdminMealController extends AbstractMealController {
         return super.getAllByRestaurantId(restaurantId);
     }
 
-    @PutMapping(value = "/{mealId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "{mealId}/restaurant/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@PathVariable Integer mealId,
-                       @RequestBody Meal meal) {
-        super.update(mealId, meal);
+                       @PathVariable Integer restaurantId,
+                       @Valid @RequestBody MealTO mealTO) {
+        super.update(mealId, restaurantId, mealTO);
     }
 
-    @DeleteMapping(value = "/restaurant/{restaurantId}/meal/{mealId}")
-    public void deleteById(@PathVariable Integer restaurantId,
-                           @PathVariable Integer mealId) {
-        super.deleteById(restaurantId, mealId);
+    @DeleteMapping(value = "{mealId}/restaurant/{restaurantId}")
+    public void deleteById(@PathVariable Integer mealId,
+                           @PathVariable Integer restaurantId) {
+        super.deleteById(mealId, restaurantId);
     }
 }
