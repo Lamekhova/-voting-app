@@ -28,6 +28,7 @@ public class AdminMealController {
     @PostMapping(value = "/restaurant/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addNew(@PathVariable Integer restaurantId,
                                  @Valid @RequestBody MealTO mealTO) {
+
         mealService.addNew(restaurantId, mealTO);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
