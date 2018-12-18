@@ -1,5 +1,7 @@
 package com.example.sweater.to;
 
+import com.example.sweater.model.Vote;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -14,17 +16,11 @@ public class VoteTO {
     public VoteTO() {
     }
 
-    public VoteTO(LocalDateTime dateTime, Integer restaurantId, String restaurantName) {
-        this.dateTime = dateTime;
-        this.restaurantId = restaurantId;
-        this.restaurantName = restaurantName;
+    public VoteTO(Vote vote) {
+        this.dateTime = LocalDateTime.of(vote.getDate(), vote.getTime());
+        this.restaurantId = vote.getRestaurant().getId();
+        this.restaurantName = vote.getRestaurant().getName();
     }
-
-//    public VoteTO(Vote vote) {
-//        this.dateTime = LocalDateTime.of(vote.getDate(), vote.getTime());
-//        this.restaurantId = vote.getRestaurant().getId();
-//        this.restaurantName = vote.getRestaurant().getName();
-//    }
 
     public LocalDateTime getDateTime() {
         return dateTime;

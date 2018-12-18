@@ -39,14 +39,14 @@ public class ProfileUserController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity update(@AuthenticationPrincipal UserPrincipal userPrincipal,
-                       @Valid @RequestBody UserTO userTO) {
+                                 @Valid @RequestBody UserTO userTO) {
         User user = new User(
                 userPrincipal.getUserId(),
                 userTO.getName(),
-                userTO.getEmail(),
+                userTO.getEmail().toLowerCase(),
                 userTO.getPassword(),
                 getRolesFromAuthorities(userPrincipal.getAuthorities()));
-        userService.update(user.getId(), user);
+        userService.update(userPrincipal.getUserId(), user);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
@@ -55,5 +55,4 @@ public class ProfileUserController {
                 .map(gr -> Role.valueOf(gr.getAuthority()))
                 .collect(Collectors.toSet());
     }
-
 }

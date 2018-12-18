@@ -49,10 +49,7 @@ public class VoteService {
     public List<VoteTO> getAllByUser(User user) {
         Assert.notNull(user, "user must not be null");
         return crudVoteRepository.findAllByUser(user).stream()
-                .map(vote -> new VoteTO(
-                        LocalDateTime.of(vote.getDate(), vote.getTime()),
-                        vote.getRestaurant().getId(),
-                        vote.getRestaurant().getName()))
+                .map(vote -> new VoteTO(vote))
                 .collect(Collectors.toList());
     }
 

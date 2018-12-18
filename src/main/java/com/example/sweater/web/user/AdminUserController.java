@@ -3,7 +3,9 @@ package com.example.sweater.web.user;
 import com.example.sweater.model.User;
 import com.example.sweater.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,35 +27,41 @@ public class AdminUserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public User addNew(@RequestBody User user) {
+    public ResponseEntity addNew(@RequestBody User user) {
         checkNew(user);
-        return userService.addNew(user);
+        userService.addNew(user);
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User getById(@PathVariable Integer id) {
-        return userService.getById(id);
+    public ResponseEntity getById(@PathVariable Integer id) {
+        User user = userService.getById(id);
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User getByEmail(@RequestParam(name = "email") String email) {
-        return userService.getByEmail(email);
+    public ResponseEntity getByEmail(@RequestParam(name = "email") String email) {
+        User user = userService.getByEmail(email);
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<User> getAll() {
-        return userService.getAll();
+    public ResponseEntity getAll() {
+        List<User> userList = userService.getAll();
+        return ResponseEntity.ok(userList);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@PathVariable("id") Integer id,
+    public ResponseEntity update(@PathVariable("id") Integer id,
                        @RequestBody User user) {
         assureIdConsistent(user, id);
         userService.update(id, user);
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void deleteById(@PathVariable Integer id) {
+    public ResponseEntity deleteById(@PathVariable Integer id) {
         userService.deleteById(id);
+        return ResponseEntity.ok(HttpStatus.NO_CONTENT);
     }
 }

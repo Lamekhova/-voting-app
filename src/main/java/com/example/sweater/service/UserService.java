@@ -1,8 +1,8 @@
 package com.example.sweater.service;
 
-import com.example.sweater.security.UserPrincipal;
 import com.example.sweater.model.User;
 import com.example.sweater.repository.CrudUserRepository;
+import com.example.sweater.security.UserPrincipal;
 import com.example.sweater.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -14,9 +14,9 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-import static com.example.sweater.util.ExceptionUtil.checkNotFound;
-import static com.example.sweater.util.ExceptionUtil.checkNotFoundObjectWithId;
-import static com.example.sweater.util.ExceptionUtil.checkNotFoundWithId;
+import static com.example.sweater.util.ExceptionUtil.*;
+import static com.example.sweater.util.UserUtil.encodePassword;
+import static com.example.sweater.util.UserUtil.isEncodePassword;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -51,6 +51,10 @@ public class UserService implements UserDetailsService {
     public void update(Integer id, User user) throws NotFoundException {
         Assert.notNull(user, "user must not be null");
         checkNotFoundObjectWithId(getById(user.getId()), id);
+        String password = user.getPassword();
+        if (!isEncodePassword(password, getById(id).getPassword())) {
+            user.setPassword(encodePassword(password));
+        }
         crudUserRepository.save(user);
     }
 
