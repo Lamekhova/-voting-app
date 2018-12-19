@@ -53,7 +53,7 @@ public class AdminUserController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity update(@PathVariable("id") Integer id,
-                       @RequestBody User user) {
+                                 @RequestBody User user) {
         assureIdConsistent(user, id);
         userService.update(id, user);
         return ResponseEntity.ok(HttpStatus.CREATED);
