@@ -15,7 +15,7 @@ import org.springframework.util.Assert;
 import java.util.List;
 
 import static com.example.sweater.util.ExceptionUtil.*;
-import static com.example.sweater.util.UserUtil.checkMatchesPasswords;
+import static com.example.sweater.util.UserUtil.encodePassword;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -31,6 +31,8 @@ public class UserService implements UserDetailsService {
 
     public User addNew(User user) {
         Assert.notNull(user, "user must not be null");
+        String rawPassword = user.getPassword();
+        user.setPassword(encodePassword(rawPassword));
         return crudUserRepository.save(user);
     }
 
@@ -49,10 +51,7 @@ public class UserService implements UserDetailsService {
 
     public void update(Integer id, User user) throws NotFoundException {
         Assert.notNull(user, "user must not be null");
-        checkNotFoundObjectWithId(user, id);
-        String oldPassword = user.getPassword();
-        String encodePassword = checkMatchesPasswords(oldPassword, getById(id).getPassword());
-        user.setPassword(encodePassword);
+        checkNotFoundObjectWithId(getById(id), id);
         crudUserRepository.save(user);
     }
 

@@ -1,6 +1,7 @@
 package com.example.sweater.service;
 
 import com.example.sweater.model.Meal;
+import com.example.sweater.model.Restaurant;
 import com.example.sweater.repository.CrudMealRepository;
 import com.example.sweater.repository.CrudRestaurantRepository;
 import com.example.sweater.to.MealTO;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 import static com.example.sweater.util.ExceptionUtil.*;
 
@@ -36,11 +36,12 @@ public class MealService {
     }
 
     public Meal getById(Integer mealId, Integer restaurantId) {
-        Meal meal = crudMealRepository.getById(mealId);
-        if (!(meal != null && meal.getRestaurant() != null
-                && Objects.equals(meal.getRestaurant().getId(), restaurantId))) {
-            meal = null;
-        }
+        Restaurant restaurant = restaurantService.getById(restaurantId);
+        Meal meal = crudMealRepository.getById(mealId, restaurant);
+//        if (!(meal != null && meal.getRestaurant() != null
+//                && Objects.equals(meal.getRestaurant().getId(), restaurantId))) {
+//            meal = null;
+//        }
         return checkNotFoundObjectWithId(meal, mealId);
     }
 
@@ -52,7 +53,7 @@ public class MealService {
     public void update(Integer mealId, Integer restaurantId, MealTO mealTO) {
         Meal meal = createMealFromMealTO(mealTO, restaurantId);
         meal.setId(mealId);
-        checkNotFoundObjectWithId(crudMealRepository.getById(mealId), mealId);
+        checkNotFoundObjectWithId(getById(mealId, restaurantId), mealId);
         crudMealRepository.save(meal);
     }
 
@@ -61,13 +62,12 @@ public class MealService {
     }
 
     private Meal createMealFromMealTO(MealTO mealTO, Integer restaurantId) {
-        Meal meal = new Meal(
+        return new Meal(
                 mealTO.getId(),
                 mealTO.getName(),
                 mealTO.getPrice(),
                 LocalDate.now(),
                 restaurantService.getById(restaurantId)
         );
-        return meal;
     }
 }

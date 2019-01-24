@@ -27,9 +27,9 @@ class MealServiceTest {
         assertNotNull(meal);
         assertEquals(STEAK.getName(), meal.getName());
         assertEquals(STEAK.getPrice(), meal.getPrice());
-        assertEquals(MINDAL, meal.getRestaurant());
+        assertEquals(MINDAL.getName(), meal.getRestaurant().getName());
         // for tests
-        mealService.deleteById(MINDAL.getId(), meal.getId());
+//        mealService.deleteById(MINDAL.getId(), meal.getId());
     }
 
     @Test

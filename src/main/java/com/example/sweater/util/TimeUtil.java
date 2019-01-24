@@ -10,7 +10,7 @@ public class TimeUtil {
         return voteFinishTime;
     }
 
-    //for VoteService tests
+    //only for VoteService tests
     public static void setVoteFinishTime(LocalTime time){
         voteFinishTime = time;
     }

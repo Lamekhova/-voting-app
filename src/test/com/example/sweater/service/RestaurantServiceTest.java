@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.example.sweater.MealTestData.PEPERONI_MEALS_TODAY;
@@ -61,7 +62,7 @@ class RestaurantServiceTest {
         PEPERONI.setMeals(PEPERONI_MEALS_TODAY);
         PERCHINI.setMeals(PERCHINI_MEALS_TODAY);
         List<Restaurant> list = restaurantService.getAllWithMealsByDate(LocalDate.now());
-        assertEquals(List.of(PEPERONI, PERCHINI), list);
+        assertEquals(Arrays.asList(PEPERONI, PERCHINI), list);
         System.out.println(list.get(0).getName() + "\t" + list.get(1).getName());
         assertEquals(PEPERONI.getMeals(), list.get(0).getMeals());
         assertEquals(PERCHINI.getMeals(), list.get(1).getMeals());

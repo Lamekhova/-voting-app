@@ -11,10 +11,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 /**
- * <p>
+ *
  * Handling Hibernate lazy-loading
  *
- * @link https://github.com/FasterXML/jackson
  * @link https://github.com/FasterXML/jackson-datatype-hibernate
  * @link https://github.com/FasterXML/jackson-docs/wiki/JacksonHowToCustomSerializers
  */
@@ -28,8 +27,11 @@ public class JacksonObjectMapper extends ObjectMapper {
         registerModule(new JavaTimeModule());
         configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
+        // Make all fields globally serializable
         setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
         setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+
+        // Suppress serialization of properties with zero values
         setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 }

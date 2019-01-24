@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static com.example.sweater.util.UserUtil.checkMatchesPasswords;
+import static com.example.sweater.util.UserUtil.checkEncodePassword;
 import static com.example.sweater.util.UserUtil.getRolesFromAuthorities;
 
 @RestController
@@ -44,13 +44,11 @@ public class ProfileUserController {
     }
 
     private User createUserFromUserTO(UserTO userTO, UserPrincipal userPrincipal) {
-        String password = checkMatchesPasswords(userTO.getPassword(), userPrincipal.getPassword());
-        User user = new User(
+        return new User(
                 userPrincipal.getUserId(),
                 userTO.getName(),
-                userTO.getEmail().toLowerCase(),
-                password,
+                userTO.getEmail(),
+                checkEncodePassword(userTO.getPassword(), userPrincipal.getPassword()),
                 getRolesFromAuthorities(userPrincipal.getAuthorities()));
-        return user;
     }
 }

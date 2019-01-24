@@ -10,14 +10,18 @@ import java.util.stream.Collectors;
 
 public class UserUtil {
 
-    private static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
 
-    public static String checkMatchesPasswords(CharSequence password, String encodePassword) {
-        String lastEncodePassword = encodePassword;
-        if (!passwordEncoder.matches(password, encodePassword)) {
-            lastEncodePassword = passwordEncoder.encode(password);
+    public static String encodePassword(String password) {
+        return passwordEncoder.encode(password);
+    }
+
+    public static String checkEncodePassword(String rawPassword, String encodePassword) {
+        String actualPassword = encodePassword;
+        if (!passwordEncoder.matches(rawPassword, encodePassword)) {
+            actualPassword = passwordEncoder.encode(rawPassword);
         }
-        return lastEncodePassword;
+        return actualPassword;
     }
 
     public static Set<Role> getRolesFromAuthorities(Collection<? extends GrantedAuthority> authorities) {
