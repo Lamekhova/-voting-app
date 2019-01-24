@@ -3,12 +3,15 @@ package com.example.sweater.util;
 import com.example.sweater.model.AbstractBaseEntity;
 import com.example.sweater.util.exception.LateToVote;
 import com.example.sweater.util.exception.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalTime;
 
 import static com.example.sweater.util.TimeUtil.getVoteFinishTime;
 
 public class ExceptionUtil {
+    private static final Logger LOG = LoggerFactory.getLogger(ExceptionUtil.class);
 
     private ExceptionUtil() {
     }
@@ -28,18 +31,21 @@ public class ExceptionUtil {
 
     public static void checkNotFound(boolean found, String msg) {
         if (!found) {
+            LOG.error("Not found entity with " + msg);
             throw new NotFoundException("Not found entity with " + msg);
         }
     }
 
     public static void checkLateToVote(){
         if (!LocalTime.now().isBefore(getVoteFinishTime())){
+            LOG.error("Vote can't be changed");
             throw new LateToVote("Vote can't be changed");
         }
     }
 
     public static void checkNew(AbstractBaseEntity entity) {
         if (!entity.isNew()) {
+            LOG.error(entity + " must be new (id = null)");
             throw new IllegalArgumentException(entity + " must be new (id = null)");
         }
     }
@@ -48,19 +54,8 @@ public class ExceptionUtil {
         if (entity.isNew()) {
             entity.setId(id);
         } else if (entity.getId() != id) {
+            LOG.error(entity + " must be with id = " + id);
             throw new IllegalArgumentException(entity + " must be with id = " + id);
         }
     }
-
-    //  http://stackoverflow.com/a/28565320/548473
-//    public static Throwable getRootCause(Throwable t) {
-//        Throwable result = t;
-//        Throwable cause;
-//
-//        while (null != (cause = result.getCause()) && (result != cause)) {
-//            result = cause;
-//        }
-//        return result;
-//    }
-
 }
