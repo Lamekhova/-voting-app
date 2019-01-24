@@ -18,7 +18,7 @@ public class UserTestData {
     public static final User WITH_DUPLICATE_EMAIL = new User(100033,"Johnson", "userFour@mail.ru", "userPass6", Role.ROLE_USER);
     public static final User NOT_EXISTENT_USER = new User(1, "Barry", "userBarry@mail.ru", "userPass7", Role.ROLE_USER);
 
-    public static final List<User> USER_LIST = List.of(IVAN, JOHN, MARRY, NICOLAS, PERRY, SUE);
-    public static final List<User> USER_LIST_WITHOUT_IVAN = List.of(JOHN, MARRY, NICOLAS, PERRY, SUE);
+    public static final List<User> USER_LIST = List.of(IVAN, JOHN, NICOLAS, PERRY, SUE);
+    public static final List<User> USER_LIST_WITHOUT_IVAN = List.of(JOHN, NICOLAS, PERRY, SUE);
 
 }

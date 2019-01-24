@@ -15,6 +15,6 @@ public class RestaurantTestData {
     public static final Restaurant WITH_DUPLICATE_NAME = new Restaurant("Mindal", "S175 Washington Pl.", null);
     public static final Restaurant NOT_EXISTENT_RESTAURANT = new Restaurant(1, "KartoFun", "225 Park Ave. S", null);
 
-    public static final List<Restaurant> RESTAURANT_LIST = List.of(MINDAL, PEPERONI, PERCHINI, WOOD);
-    public static final List<Restaurant> RESTAURANT_LIST_WITHOUT_MINDAL = List.of(PEPERONI, PERCHINI, WOOD);
+    public static final List<Restaurant> RESTAURANT_LIST = List.of(MINDAL, PEPERONI, PERCHINI);
+    public static final List<Restaurant> RESTAURANT_LIST_WITHOUT_MINDAL = List.of(PEPERONI, PERCHINI);
 }
