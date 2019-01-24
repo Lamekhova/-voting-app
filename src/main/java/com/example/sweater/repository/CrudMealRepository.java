@@ -4,7 +4,6 @@ import com.example.sweater.model.Meal;
 import com.example.sweater.model.Restaurant;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +20,8 @@ public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
 
     List<Meal> findMealsByRestaurantIdOrderByDateDesc(Integer restaurantId);
 
-    @Modifying
-    @Transactional
-    @Query("DELETE FROM Meal m WHERE m.id=?2 AND m.restaurant.id=?1")
-    int deleteById(Integer restaurantId, Integer mealId);
+//    @Modifying
+//    @Transactional
+//    @Query("DELETE FROM Meal m WHERE m.id=?1 AND m.restaurant.id=?2")
+//    int deleteById(Integer mealId, Integer restaurantId);
 }

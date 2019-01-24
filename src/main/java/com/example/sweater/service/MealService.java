@@ -57,8 +57,12 @@ public class MealService {
         crudMealRepository.save(meal);
     }
 
-    public void deleteById(Integer mealId, Integer restaurantId) {
-        checkNotFoundWithId(crudMealRepository.deleteById(restaurantId, mealId) != 0, mealId);
+    public void delete(Integer mealId, Integer restaurantId) {
+        try {
+            crudMealRepository.deleteById(mealId);
+        } catch (org.springframework.dao.EmptyResultDataAccessException e) {
+            checkNotFoundWithId(false, mealId);
+        }
     }
 
     private Meal createMealFromMealTO(MealTO mealTO, Integer restaurantId) {

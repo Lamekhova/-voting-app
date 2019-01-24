@@ -28,8 +28,10 @@ public class MealTestData {
     public static final Meal RABBIT = new Meal(100019, "Grilled rabbit", 180.00, LocalDate.now().minus(Period.ofDays(1)), PERCHINI);
 
     public static final MealTO STEAK = new MealTO(null,"Beef steak", 590.00);
+    public static final MealTO EGGTO = new MealTO(null,"NEW Egg benedict with hollandaise sauce and rise", 600.00);
 
     public static final Meal NOT_EXISTENT_MEAL = new Meal(1, "Fried crocodile", 900.00, LocalDate.now(), MINDAL);
+    public static final MealTO NOT_EXISTENT_MEAL_TO = new MealTO(null, "Not existent meal", 900.00);
 
     public static final List<Meal> ALL_PEPERONI_MEALS = List.of(EGGPLANT, BURGER, EGG, QUESADILLA, PASTA, FONDANT);
     public static final List<Meal> ALL_PEPERONI_MEALS_WITHOUT_EGGPLANT = List.of(BURGER, EGG, QUESADILLA, PASTA, FONDANT);

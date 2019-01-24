@@ -28,7 +28,6 @@ public class AdminMealController {
     @PostMapping(value = "/restaurant/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addNew(@PathVariable Integer restaurantId,
                                  @Valid @RequestBody MealTO mealTO) {
-
         mealService.addNew(restaurantId, mealTO);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
@@ -50,7 +49,7 @@ public class AdminMealController {
     @DeleteMapping(value = "{mealId}/restaurant/{restaurantId}")
     public ResponseEntity deleteById(@PathVariable Integer mealId,
                                      @PathVariable Integer restaurantId) {
-        mealService.deleteById(mealId, restaurantId);
+        mealService.delete(mealId, restaurantId);
         return ResponseEntity.ok(HttpStatus.NO_CONTENT);
     }
 }

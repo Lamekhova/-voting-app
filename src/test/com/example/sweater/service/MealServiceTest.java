@@ -28,13 +28,11 @@ class MealServiceTest {
         assertEquals(STEAK.getName(), meal.getName());
         assertEquals(STEAK.getPrice(), meal.getPrice());
         assertEquals(MINDAL.getName(), meal.getRestaurant().getName());
-        // for tests
-//        mealService.deleteById(MINDAL.getId(), meal.getId());
     }
 
     @Test
     void getById() {
-        assertEquals(BURGER, mealService.getById(PEPERONI.getId(), BURGER.getId()));
+        assertEquals(BURGER, mealService.getById(BURGER.getId(), PEPERONI.getId()));
     }
 
     @Test
@@ -54,28 +52,32 @@ class MealServiceTest {
                 mealService.getAllByRestaurantId(NOT_EXISTENT_RESTAURANT.getId()));
     }
 
-//    @Test
-//    void update() {
-//        EGG.setPrice(370.00);
-//        mealService.update(EGG);
-//        assertEquals(EGG, mealService.getById(PEPERONI.getId(), EGG.getId()));
-//    }
-//
-//    @Test
-//    void updateNotFound() {
-//        assertThrows(NotFoundException.class, () ->
-//                mealService.update(NOT_EXISTENT_MEAL));
-//    }
+    @Test
+    void update() {
+        mealService.update(EGG.getId(), PEPERONI.getId(), EGGTO);
+        Meal meal = mealService.getById(EGG.getId(), PEPERONI.getId());
+        assertNotNull(meal);
+        assertEquals(EGG.getId(), meal.getId());
+        assertEquals(EGGTO.getName(), meal.getName());
+        assertEquals(EGGTO.getPrice(), meal.getPrice());
+        assertEquals(PEPERONI, meal.getRestaurant());
+    }
+
+    @Test
+    void updateNotFound() {
+        assertThrows(NotFoundException.class, () ->
+                mealService.update(1, PEPERONI.getId(), NOT_EXISTENT_MEAL_TO));
+    }
 
     @Test
     void deleteById() {
-        mealService.deleteById(PEPERONI.getId(), EGGPLANT.getId());
+        mealService.delete(EGGPLANT.getId(), PEPERONI.getId());
         assertEquals(ALL_PEPERONI_MEALS_WITHOUT_EGGPLANT, mealService.getAllByRestaurantId(PEPERONI.getId()));
     }
 
     @Test
     void deleteNotFoundById() {
         assertThrows(NotFoundException.class, () ->
-                mealService.deleteById(MINDAL.getId(), NOT_EXISTENT_MEAL.getId()));
+                mealService.delete(MINDAL.getId(), NOT_EXISTENT_MEAL.getId()));
     }
 }
