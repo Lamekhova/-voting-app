@@ -11,11 +11,6 @@ public interface CrudUserRepository extends JpaRepository<User, Integer> {
 
     User findUserByEmail(String email);
 
-//    @Transactional
-//    @Modifying
-//    @Query("DELETE FROM User u WHERE u.id=?1")
-//    int delete(Integer id);
-
     @Transactional
     int removeById(int id);
 }

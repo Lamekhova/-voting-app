@@ -38,10 +38,6 @@ public class MealService {
     public Meal getById(Integer mealId, Integer restaurantId) {
         Restaurant restaurant = restaurantService.getById(restaurantId);
         Meal meal = crudMealRepository.getById(mealId, restaurant);
-//        if (!(meal != null && meal.getRestaurant() != null
-//                && Objects.equals(meal.getRestaurant().getId(), restaurantId))) {
-//            meal = null;
-//        }
         return checkNotFoundObjectWithId(meal, mealId);
     }
 
