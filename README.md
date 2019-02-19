@@ -25,14 +25,14 @@ Build a voting system for deciding where to have lunch.
         * `GET: /rest/votes/result?date=` get voting result for requested date, if the parameter date is not passed, it is equal to the current date**.
         * `GET: /rest/restaurants/{restaurantId}` get restaurant with id {}.
         * `GET: /rest/meals/{mealId}/restaurant/{restaurantId}` get meal with id {} by restaurant with id {}.
-  
-  + ONLY USER ENDPOINTS  
+   
+   + ONLY USER ENDPOINTS  
         * `GET: /rest/profile/votes` get all user votes sorted by date.
         * `GET: /rest/profile` get user data. 
         * `PUT: /rest/profile` update user name, email or password. 
         * `POST: /rest/profile/votes?restaurantId=` vote for a restaurant. 
   
-  + ONLY ADMIN ENDPOINTS
+   + ONLY ADMIN ENDPOINTS
         * `GET: /rest/admin/meals/restaurant/{restaurantId}` get all meals for restaurant with id {}. 
         * `GET: /rest/admin/restaurants` get all restaurants. 
         * `GET: /rest/admin/users` get all users. 
