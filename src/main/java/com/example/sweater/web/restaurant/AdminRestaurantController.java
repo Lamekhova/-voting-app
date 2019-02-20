@@ -2,6 +2,7 @@ package com.example.sweater.web.restaurant;
 
 import com.example.sweater.model.Restaurant;
 import com.example.sweater.service.RestaurantService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,6 +15,7 @@ import static com.example.sweater.util.ExceptionUtil.assureIdConsistent;
 
 @RestController
 @RequestMapping(AdminRestaurantController.REST_URL)
+@Api(description="Operations with restaurants that only an administrator can perform")
 public class AdminRestaurantController {
 
     static final String REST_URL = "/rest/admin/restaurants";

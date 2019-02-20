@@ -4,6 +4,7 @@ import com.example.sweater.model.User;
 import com.example.sweater.security.UserPrincipal;
 import com.example.sweater.service.UserService;
 import com.example.sweater.to.UserTO;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +19,7 @@ import static com.example.sweater.util.UserUtil.getRolesFromAuthorities;
 
 @RestController
 @RequestMapping(ProfileUserController.REST_URL)
+@Api(description = "Operations with user data that only users can perform in their own profile")
 public class ProfileUserController {
 
     static final String REST_URL = "/rest/profile";

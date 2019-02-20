@@ -3,6 +3,7 @@ package com.example.sweater.web.meal;
 import com.example.sweater.model.Meal;
 import com.example.sweater.service.MealService;
 import com.example.sweater.to.MealTO;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(AdminMealController.REST_URL)
+@Api(description="Operations with meals that only an administrator can perform")
 public class AdminMealController {
 
     static final String REST_URL = "/rest/admin/meals";

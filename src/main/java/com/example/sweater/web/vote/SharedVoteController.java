@@ -1,6 +1,7 @@
 package com.example.sweater.web.vote;
 
 import com.example.sweater.service.VoteService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(SharedVoteController.REST_URL)
+@Api(description="Operations with votes that all authorized users can perform")
 public class SharedVoteController {
 
     static final String REST_URL = "/rest/votes";

@@ -2,6 +2,7 @@ package com.example.sweater.web.user;
 
 import com.example.sweater.model.User;
 import com.example.sweater.service.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ import static com.example.sweater.util.ExceptionUtil.checkNew;
 
 @RestController
 @RequestMapping(AdminUserController.REST_URL)
+@Api(description="Operations with users that only an administrator can perform")
 public class AdminUserController {
 
     static final String REST_URL = "/rest/admin/users";

@@ -50,17 +50,19 @@ Build a voting system for deciding where to have lunch.
         
  ##How to test
  
- Application uses H2 database so you don't need to install anything, H2 works in memory. You need to create a new environment variable with project's root. That's all, you can run tests.  
- There are 36 tests for service layer. For controller tests you can use   
+    There are 36 tests for service layer. Application uses H2 database so you don't need to install anything, H2 works in memory. You need to create a new environment variable with project's root. That's all, you can run tests.  
+    For controllers test you should build application and go to url http://localhost:8080/swagger-ui.html. There are 22 endpoints. 
+    
+    To test controllers requests you should login as User or Admin
+     
+     Admin
+     adminOne@mail.ru
+     adminPass1
+     
+     User
+     userOne@mail.ru
+     userPass1
  
- To test requests you can login as User or Admin
  
- Admin
- adminOne@mail.ru
- adminPass1
- 
- User
- userOne@mail.ru
- userPass1
 
  **NOTE.** Records in database has Today and Yesterday date so when you will test application with SoapUI, set request parameters to correct values.

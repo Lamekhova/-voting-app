@@ -2,6 +2,7 @@ package com.example.sweater.web.restaurant;
 
 import com.example.sweater.model.Restaurant;
 import com.example.sweater.service.RestaurantService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(SharedRestaurantController.REST_URL)
+@Api(description="Operations with restaurants that all authorized users can perform")
 public class SharedRestaurantController {
 
     static final String REST_URL = "/rest/restaurants";

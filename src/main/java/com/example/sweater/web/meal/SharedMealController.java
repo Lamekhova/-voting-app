@@ -2,6 +2,7 @@ package com.example.sweater.web.meal;
 
 import com.example.sweater.model.Meal;
 import com.example.sweater.service.MealService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(SharedMealController.REST_URL)
+@Api(description="Operations with meals that all authorized users can perform")
 public class SharedMealController {
 
     static final String REST_URL = "/rest/meals";
