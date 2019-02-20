@@ -47,11 +47,12 @@ Build a voting system for deciding where to have lunch.
         * `DELETE: /rest/admin/meals/{mealId}/restaurant/{restaurantId}` delete meal with id {} by a restaurant with id {}. 
         * `DELETE: /rest/admin/restaurants/{restaurantId}` delete restaurant with id {}. 
         * `DELETE: /rest/admin/users/{userId}` delete user with id {}. 
-        
- ##How to test
- 
-    There are 36 tests for service layer. Application uses H2 database so you don't need to install anything, H2 works in memory. You need to create a new environment variable with project's root. That's all, you can run tests.  
-    For controllers test you should build application and go to url http://localhost:8080/swagger-ui.html. There are 22 endpoints. 
+  
+ ## How to test  
+          
+There are 36 tests for service layer. Application uses H2 database so you don't need to install anything, H2 works in memory. 
+You need to create a new environment variable with project's root. That's all, you can run tests.  
+For controllers test you should build application and go to url http://localhost:8080/swagger-ui.html. There are 22 endpoints. 
     
     To test controllers requests you should login as User or Admin
      
@@ -63,6 +64,4 @@ Build a voting system for deciding where to have lunch.
      userOne@mail.ru
      userPass1
  
- 
-
  **NOTE.** Records in database has Today and Yesterday date so when you will test application with SoapUI, set request parameters to correct values.
