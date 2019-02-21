@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Sql(executionPhase= Sql.ExecutionPhase.BEFORE_TEST_METHOD,scripts="classpath:/data.sql")
-class UserServiceTest {
+public class UserServiceTest {
 
     @Autowired
     private UserService userService;
