@@ -18,7 +18,7 @@ import java.util.List;
 @Api(description="Operations with meals that only an administrator can perform")
 public class AdminMealController {
 
-    static final String REST_URL = "/rest/admin/meals";
+    public static final String REST_URL = "/rest/admin/meals";
 
     private final MealService mealService;
 
