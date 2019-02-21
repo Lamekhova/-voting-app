@@ -22,7 +22,7 @@ import static com.example.sweater.util.UserUtil.getRolesFromAuthorities;
 @Api(description = "Operations with user data that only users can perform in their own profile")
 public class ProfileUserController {
 
-    static final String REST_URL = "/rest/profile";
+    public static final String REST_URL = "/rest/profile";
 
     private final UserService userService;
 

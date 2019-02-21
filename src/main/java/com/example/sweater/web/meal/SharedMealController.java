@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description="Operations with meals that all authorized users can perform")
 public class SharedMealController {
 
-    static final String REST_URL = "/rest/meals";
+    public static final String REST_URL = "/rest/meals";
 
     private final MealService mealService;
 

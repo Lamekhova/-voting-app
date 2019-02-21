@@ -19,7 +19,7 @@ import static com.example.sweater.util.ExceptionUtil.checkNew;
 @Api(description="Operations with users that only an administrator can perform")
 public class AdminUserController {
 
-    static final String REST_URL = "/rest/admin/users";
+    public static final String REST_URL = "/rest/admin/users";
 
     private final UserService userService;
 

@@ -18,7 +18,7 @@ import static com.example.sweater.util.ExceptionUtil.assureIdConsistent;
 @Api(description="Operations with restaurants that only an administrator can perform")
 public class AdminRestaurantController {
 
-    static final String REST_URL = "/rest/admin/restaurants";
+    public static final String REST_URL = "/rest/admin/restaurants";
 
     private final RestaurantService restaurantService;
 

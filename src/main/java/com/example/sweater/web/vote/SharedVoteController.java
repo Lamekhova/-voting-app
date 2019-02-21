@@ -19,7 +19,7 @@ import java.util.Map;
 @Api(description="Operations with votes that all authorized users can perform")
 public class SharedVoteController {
 
-    static final String REST_URL = "/rest/votes";
+    public static final String REST_URL = "/rest/votes";
 
     private final VoteService voteService;
 

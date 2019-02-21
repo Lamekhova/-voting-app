@@ -18,7 +18,7 @@ import java.util.List;
 @Api(description="Operations with votes that only a user can perform in their own profile")
 public class ProfileVoteController {
 
-    static final String REST_URL = "/rest/profile/votes";
+    public static final String REST_URL = "/rest/profile/votes";
 
     private final VoteService voteService;
 

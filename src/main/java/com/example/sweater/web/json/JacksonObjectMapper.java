@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Primary
 public class JacksonObjectMapper extends ObjectMapper {
 
-    private JacksonObjectMapper() {
+    public JacksonObjectMapper() {
         registerModule(new Hibernate5Module());
 
         registerModule(new JavaTimeModule());

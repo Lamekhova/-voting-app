@@ -17,7 +17,7 @@ import java.util.List;
 @Api(description="Operations with restaurants that all authorized users can perform")
 public class SharedRestaurantController {
 
-    static final String REST_URL = "/rest/restaurants";
+    public static final String REST_URL = "/rest/restaurants";
 
     private final RestaurantService restaurantService;
 
