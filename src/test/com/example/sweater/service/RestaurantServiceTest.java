@@ -31,36 +31,36 @@ public class RestaurantServiceTest {
 
 
     @Test
-    void addNew() {
+    public void addNew() {
         Restaurant restaurant = restaurantService.addNew(WOOD);
         assertNotNull(restaurant);
         assertEquals(restaurant, restaurantService.getById(restaurant.getId()));
     }
 
     @Test
-    void addNewWithDuplicateName() {
+    public void addNewWithDuplicateName() {
         assertThrows(DataAccessException.class, () ->
                 restaurantService.addNew(WITH_DUPLICATE_NAME));
     }
 
     @Test
-    void getById() {
+    public void getById() {
         assertEquals(PEPERONI, restaurantService.getById(100005));
     }
 
     @Test
-    void getNotFoundById() {
+    public void getNotFoundById() {
         assertThrows(NotFoundException.class, () ->
                 restaurantService.getById(NOT_EXISTENT_RESTAURANT.getId()));
     }
 
     @Test
-    void getAll() {
+    public void getAll() {
         assertEquals(RESTAURANT_LIST, restaurantService.getAll());
     }
 
     @Test
-    void getAllWithMealsByDate() {
+    public void getAllWithMealsByDate() {
         PEPERONI.setMeals(PEPERONI_MEALS_TODAY);
         PERCHINI.setMeals(PERCHINI_MEALS_TODAY);
         List<Restaurant> list = restaurantService.getAllWithMealsByDate(LocalDate.now());
@@ -71,26 +71,26 @@ public class RestaurantServiceTest {
     }
 
     @Test
-    void update() {
+    public void update() {
         PERCHINI.setAddress("New address");
         restaurantService.update(PERCHINI);
         assertEquals(PERCHINI, restaurantService.getById(PERCHINI.getId()));
     }
 
     @Test
-    void updateNotFound() {
+    public void updateNotFound() {
         assertThrows(NotFoundException.class, () ->
                 restaurantService.update(NOT_EXISTENT_RESTAURANT));
     }
 
     @Test
-    void deleteById() {
+    public void deleteById() {
         restaurantService.deleteById(100007);
         assertEquals(RESTAURANT_LIST_WITHOUT_MINDAL, restaurantService.getAll());
     }
 
     @Test
-    void deleteNotFoundById() {
+    public void deleteNotFoundById() {
         assertThrows(NotFoundException.class, () ->
                 restaurantService.deleteById(NOT_EXISTENT_RESTAURANT.getId()));
 

@@ -35,7 +35,7 @@ public class VoteServiceTest {
     private VoteService voteService;
 
     @Test
-    void addNewJustInTime() {
+    public void addNewJustInTime() {
         setVoteFinishTime(LocalTime.now().plusMinutes(1));
         Vote vote = voteService.addNew(PEPERONI.getId(), JOHN);
         assertNotNull(vote);
@@ -43,27 +43,27 @@ public class VoteServiceTest {
     }
 
     @Test
-    void addNewLate() {
+    public void addNewLate() {
         setVoteFinishTime(LocalTime.now().minusMinutes(1));
         assertThrows(LateToVote.class, () ->
                         voteService.addNew(PEPERONI.getId(), JOHN));
     }
 
     @Test
-    void getById() {
+    public void getById() {
         Vote vote = voteService.getById(VOTE_4.getId());
         assertEquals(VOTE_4.getUser(), vote.getUser());
         assertEquals(VOTE_4.getRestaurant(), vote.getRestaurant());
     }
 
     @Test
-    void getNotFoundById() {
+    public void getNotFoundById() {
         assertThrows(NotFoundException.class, () ->
                 voteService.getById(NOT_EXISTENT_VOTE.getId()));
     }
 
     @Test
-    void getAllByUser() {
+    public void getAllByUser() {
         List<VoteTO> userVotes = voteService.getAllByUser(SUE);
         assertEquals(2, userVotes.size());
         assertEquals(VOTE_3.getRestaurant().getId(), userVotes.get(0).getRestaurantId());
@@ -71,7 +71,7 @@ public class VoteServiceTest {
     }
 
     @Test
-    void getVoteResultByDate() {
+    public void getVoteResultByDate() {
         Map<String, Integer> map = voteService.getVoteResultByDate(LocalDate.now().minusDays(1));
         assertEquals(3, map.size());
         assertThat(map.keySet(), Matchers.contains("Peperoni", "Mindal", "Perchini"));

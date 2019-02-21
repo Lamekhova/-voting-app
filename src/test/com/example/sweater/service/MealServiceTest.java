@@ -22,7 +22,7 @@ public class MealServiceTest {
     private MealService mealService;
 
     @Test
-    void addNew() {
+    public void addNew() {
         Meal meal = mealService.addNew(MINDAL.getId(), STEAK);
         assertNotNull(meal);
         assertEquals(STEAK.getName(), meal.getName());
@@ -31,29 +31,29 @@ public class MealServiceTest {
     }
 
     @Test
-    void getById() {
+    public void getById() {
         assertEquals(BURGER, mealService.getById(BURGER.getId(), PEPERONI.getId()));
     }
 
     @Test
-    void getNotFoundById() {
+    public void getNotFoundById() {
         assertThrows(NotFoundException.class, () ->
                 mealService.getById(MINDAL.getId(), NOT_EXISTENT_MEAL.getId()));
     }
 
     @Test
-    void getAllByRestaurantId() {
+    public void getAllByRestaurantId() {
         assertEquals(ALL_PEPERONI_MEALS, mealService.getAllByRestaurantId(PEPERONI.getId()));
     }
 
     @Test
-    void getAllByNotFoundRestaurantId() {
+    public void getAllByNotFoundRestaurantId() {
         assertThrows(NotFoundException.class, () ->
                 mealService.getAllByRestaurantId(NOT_EXISTENT_RESTAURANT.getId()));
     }
 
     @Test
-    void update() {
+    public void update() {
         mealService.update(EGG.getId(), PEPERONI.getId(), EGGTO);
         Meal meal = mealService.getById(EGG.getId(), PEPERONI.getId());
         assertNotNull(meal);
@@ -64,19 +64,19 @@ public class MealServiceTest {
     }
 
     @Test
-    void updateNotFound() {
+    public void updateNotFound() {
         assertThrows(NotFoundException.class, () ->
                 mealService.update(1, PEPERONI.getId(), NOT_EXISTENT_MEAL_TO));
     }
 
     @Test
-    void deleteById() {
+    public void deleteById() {
         mealService.delete(EGGPLANT.getId(), PEPERONI.getId());
         assertEquals(ALL_PEPERONI_MEALS_WITHOUT_EGGPLANT, mealService.getAllByRestaurantId(PEPERONI.getId()));
     }
 
     @Test
-    void deleteNotFoundById() {
+    public void deleteNotFoundById() {
         assertThrows(NotFoundException.class, () ->
                 mealService.delete(MINDAL.getId(), NOT_EXISTENT_MEAL.getId()));
     }

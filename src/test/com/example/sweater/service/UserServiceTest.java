@@ -22,7 +22,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
-    void addNew() {
+    public void addNew() {
         User user = userService.addNew(MARRY);
         assertNotNull(user);
         MARRY.setId(user.getId());
@@ -30,40 +30,40 @@ public class UserServiceTest {
     }
 
     @Test
-    void addNewWithDuplicateEmail() {
+    public void addNewWithDuplicateEmail() {
         assertThrows(DataAccessException.class, () ->
                 userService.addNew(WITH_DUPLICATE_EMAIL));
     }
 
     @Test
-    void getById() {
+    public void getById() {
         assertEquals(IVAN, userService.getById(100000));
     }
 
     @Test
-    void getNotFoundById() {
+    public void getNotFoundById() {
         assertThrows(NotFoundException.class, () ->
                 userService.getById(NOT_EXISTENT_USER.getId()));
     }
 
     @Test
-    void getByEmail() {
+    public void getByEmail() {
         assertEquals(SUE, userService.getByEmail("userTwo@mail.ru"));
     }
 
     @Test
-    void getNotFoundByEmail() {
+    public void getNotFoundByEmail() {
         assertThrows(NotFoundException.class, () ->
                 userService.getByEmail("nonexistent@mail.com"));
     }
 
     @Test
-    void getAll() {
+    public void getAll() {
         assertEquals(USER_LIST, userService.getAll());
     }
 
     @Test
-    void update() {
+    public void update() {
         IVAN.setName("New Name");
         IVAN.setEmail("newemail@mail.ru");
         IVAN.setPassword("NewPassword");
@@ -72,19 +72,19 @@ public class UserServiceTest {
     }
 
     @Test
-    void updateNotFound() {
+    public void updateNotFound() {
         assertThrows(NotFoundException.class, () ->
                 userService.update(NOT_EXISTENT_USER.getId(), NOT_EXISTENT_USER));
     }
 
     @Test
-    void deleteById() {
+    public void deleteById() {
         userService.deleteById(100000);
         assertEquals(USER_LIST_WITHOUT_IVAN, userService.getAll());
     }
 
     @Test
-    void deleteNotFoundById() {
+    public void deleteNotFoundById() {
         assertThrows(NotFoundException.class, () ->
                 userService.deleteById(NOT_EXISTENT_USER.getId()));
 
