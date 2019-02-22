@@ -44,7 +44,6 @@ INSERT INTO votes (user_id, restaurant_id, date, time) VALUES
 
 INSERT INTO roles (user_id, role) VALUES
        (100000,   'ROLE_ADMIN'),
-       (100000,   'ROLE_USER'),
        (100001,   'ROLE_USER'),
        (100002,   'ROLE_USER'),
        (100003,   'ROLE_USER'),

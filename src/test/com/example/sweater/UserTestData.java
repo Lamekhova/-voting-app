@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UserTestData {
 
-    public static final User IVAN = new User(100000, "Ivan", "adminOne@mail.ru", "adminPass1", Role.ROLE_ADMIN, Role.ROLE_USER);
+    public static final User IVAN = new User(100000, "Ivan", "adminOne@mail.ru", "adminPass1", Role.ROLE_ADMIN);
     public static final User NICOLAS = new User(100001, "Nicolas", "userOne@mail.ru", "userPass1", Role.ROLE_USER);
     public static final User SUE = new User(100002, "Sue", "userTwo@mail.ru", "userPass2", Role.ROLE_USER);
     public static final User PERRY = new User(100003, "Perry", "userThree@mail.ru", "userPass3", Role.ROLE_USER);

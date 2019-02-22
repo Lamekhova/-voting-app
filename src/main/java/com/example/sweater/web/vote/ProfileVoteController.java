@@ -3,7 +3,6 @@ package com.example.sweater.web.vote;
 import com.example.sweater.security.UserPrincipal;
 import com.example.sweater.service.VoteService;
 import com.example.sweater.to.VoteTO;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(ProfileVoteController.REST_URL)
-@Api(description="Operations with votes that only a user can perform in their own profile")
 public class ProfileVoteController {
 
     public static final String REST_URL = "/rest/profile/votes";
