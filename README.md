@@ -1,4 +1,4 @@
-Voting system for deciding where to have lunch.
+Voting system for deciding where to have lunch
 ==================
 
 Task: Design and implement a REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) without frontend.
@@ -114,4 +114,4 @@ There are 36 tests for service layer. Application uses H2 database so you don't 
 You need to create a new environment variable with project's root. That's all, you can run tests.  
 For controllers test you can use Git Bash or Postman.
 
- **NOTE.** Records in database has Today and Yesterday date so when you will test application with SoapUI, set request parameters to correct values.
+ **NOTE.** Records in database has Today and Yesterday date so when you will test application, set request parameters to correct values.
