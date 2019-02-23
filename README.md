@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/Lamekhova/VotingApp.svg?branch=master)](https://travis-ci.com/Lamekhova/VotingApp)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3394631ee80e4de09f3f4ee25d672ae4)](https://www.codacy.com/app/Lamekhova/VotingApp?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Lamekhova/VotingApp&amp;utm_campaign=Badge_Grade)
+
 Voting system for deciding where to have lunch
 ==================
 
