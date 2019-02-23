@@ -1,6 +1,8 @@
 Voting system for deciding where to have lunch
 ==================
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b2ecfc9e96804419811d7342f5ce877c)](https://app.codacy.com/app/Lamekhova/VotingApp?utm_source=github.com&utm_medium=referral&utm_content=Lamekhova/VotingApp&utm_campaign=Badge_Grade_Dashboard)
+
 Task: Design and implement a REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) without frontend.
 
  * 2 types of users: admin and regular users
