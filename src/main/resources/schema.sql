@@ -42,7 +42,7 @@ CREATE TABLE meals (
 
 CREATE TABLE votes
 (
-  id            INTEGER DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
+  id            INTEGER DEFAULT global_seq.nextval PRIMARY KEY,
   date          DATE                    NOT NULL,
   time          TIME                    NOT NULL,
   user_id       INTEGER                 NOT NULL,

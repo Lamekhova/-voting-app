@@ -113,7 +113,7 @@ Java 11 Stream API, Maven, H2 database, Spring Security, Spring Boot, Spring Dat
 
 ## How to test  
           
-There are 36 tests for service layer. Application uses H2 database so you don't need to install anything, H2 works in memory. 
+There are 36 integration tests. Application uses H2 database so you don't need to install anything, H2 works in memory. 
 You need to create a new environment variable with project's root. That's all, you can run tests.  
 For controllers test you can use Git Bash or Postman. There are 22 endpoints.
 
